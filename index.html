@@ -10,6 +10,12 @@
 
 <body>
     <h1>Bank Exchange Rates</h1>
+    <div class="sorting-options">
+        <input type="radio" id="default-sorting" name="bank-filter" value="all" checked>
+        <label for="default-sorting">Default View</label>
+        <input type="radio" id="best-rates" name="bank-filter" value="best">
+        <label for="best-rates">Sort by Best Rate</label>
+    </div>
     <div id="bank-display"></div>
     <script type="module" src="js/script.js"></script>
 </body>
