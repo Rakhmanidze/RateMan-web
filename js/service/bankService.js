@@ -1,9 +1,7 @@
 import { CurrencyCode } from "../model/CurrencyCode.js";
 import { CurrencyRate } from "../model/CurrencyRate.js";
 import { Bank } from "../model/Bank.js";
-import { createCurrencyCode } from "../utils/CurrencyUtils.js";
 
-// Fetch data from the real API
 async function fetchAllBankRatesData() {
   const response = await fetch(`https://data.kurzy.cz/json/meny/b[-1].json`, {
     method: "GET",
@@ -14,7 +12,6 @@ async function fetchAllBankRatesData() {
   return response.json();
 }
 
-// Function to process bank data
 function processBankData(data) {
   if (!data || !data.kurzy) {
     console.warn("Invalid bank data received");
@@ -24,7 +21,7 @@ function processBankData(data) {
   try {
     const rates = Object.entries(data.kurzy)
       .map(([currency, rateData]) => {
-        const currencyCode = createCurrencyCode(currency);
+        const currencyCode = CurrencyCode.create(currency);
         if (!currencyCode) return null;
 
         // Handle both dev_nakup/dev_prodej and val_nakup/val_prodej
@@ -55,7 +52,6 @@ function processBankData(data) {
   }
 }
 
-// Fetch and process all banks in one request
 export async function fetchAndProcessAllBankRates() {
   try {
     const allBankData = await fetchAllBankRatesData();

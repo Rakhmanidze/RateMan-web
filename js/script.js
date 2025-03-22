@@ -1,6 +1,5 @@
 import { fetchAndProcessAllBankRates } from "./service/BankService.js";
 
-// Execute the fetch
 fetchAndProcessAllBankRates()
   .then((banks) => {
     console.log(`Successfully processed ${banks.length} banks`);
