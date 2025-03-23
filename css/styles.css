@@ -1,3 +1,18 @@
+:root {
+  --page-background: #e0e0e0;
+  --bank-background: #ffffff;
+  --bank-border: #d0d0d0;
+}
+
 body {
-  background: #e0e0e0;
+  background: var(--page-background);
+}
+
+.bank-section {
+  background: var(--bank-background);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px 0;
+  border: 1px solid var(--bank-border);
 }
