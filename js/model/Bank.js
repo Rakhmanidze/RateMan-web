@@ -2,7 +2,7 @@ import { CurrencyCode } from "./CurrencyCode.js";
 import { CurrencyRate } from "./CurrencyRate.js";
 
 export class Bank {
-  constructor(name, baseCurrency, rates) {
+  constructor(name, baseCurrency, rates, ratesDate) {
     if (typeof name !== "string") {
       throw new Error("Bank name must be a string");
     }
@@ -15,10 +15,13 @@ export class Bank {
     if (!rates.every((rate) => rate instanceof CurrencyRate)) {
       throw new Error("All rates must be instances of CurrencyRate");
     }
-
+    if (typeof ratesDate !== "string") {
+      throw new Error("ratesDate must be a string");
+    }
     this.name = name;
     this.baseCurrency = baseCurrency;
     this.rates = rates;
+    this.ratesDate = ratesDate;
   }
 
   getName() {
@@ -40,5 +43,9 @@ export class Bank {
 
   getAllRates() {
     return this.rates;
+  }
+
+  getRatesDate() {
+    return this.ratesDate;
   }
 }

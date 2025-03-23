@@ -28,13 +28,26 @@ function processBankData(data) {
         const buyRate =
           rateData.dev_nakup !== null && rateData.dev_nakup !== undefined
             ? parseFloat(rateData.dev_nakup)
-            : parseFloat(rateData.val_nakup);
+            : rateData.val_nakup !== null && rateData.val_nakup !== undefined
+            ? parseFloat(rateData.val_nakup)
+            : rateData.dev_stred !== null && rateData.dev_stred !== undefined
+            ? parseFloat(rateData.dev_stred)
+            : rateData.val_stred !== null && rateData.val_stred !== undefined
+            ? parseFloat(rateData.val_stred)
+            : null;
+
         const sellRate =
           rateData.dev_prodej !== null && rateData.dev_prodej !== undefined
             ? parseFloat(rateData.dev_prodej)
-            : parseFloat(rateData.val_prodej);
+            : rateData.val_prodej !== null && rateData.val_prodej !== undefined
+            ? parseFloat(rateData.val_prodej)
+            : rateData.dev_stred !== null && rateData.dev_stred !== undefined
+            ? parseFloat(rateData.dev_stred)
+            : rateData.val_stred !== null && rateData.val_stred !== undefined
+            ? parseFloat(rateData.val_stred)
+            : null;
 
-        if (isNaN(buyRate) || isNaN(sellRate)) return null;
+        if (buyRate === null || sellRate === null) return null;
 
         return new CurrencyRate(currencyCode, buyRate, sellRate);
       })
@@ -45,7 +58,7 @@ function processBankData(data) {
       return null;
     }
 
-    return new Bank(data.banka, new CurrencyCode("CZK"), rates);
+    return new Bank(data.banka, new CurrencyCode("CZK"), rates, data.denc);
   } catch (error) {
     console.error(`Error processing bank ${data.banka}:`, error);
     return null;

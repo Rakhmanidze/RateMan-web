@@ -15,7 +15,8 @@ export class BankDisplay {
     const header = document.createElement("h2");
     header.textContent = `${bank.getName()} (Base: ${bank
       .getBaseCurrency()
-      .getCode()})`;
+      .getCode()})
+      ${bank.getRatesDate()}`;
     bankSection.appendChild(header);
 
     const table = document.createElement("table");
