@@ -19,21 +19,44 @@ function processBankData(data) {
   }
 
   try {
+    // Special handling for CNB
+    if (data.banka === "Česká národní banka") {
+      const rates = Object.entries(data.kurzy)
+        .map(([currency, rateData]) => {
+          const currencyCode = CurrencyCode.create(currency);
+          if (!currencyCode) return null;
+
+          const middleRate = rateData.dev_stred;
+          if (middleRate === null || middleRate === undefined) return null;
+
+          // For CNB, use the same rate for both buy and sell
+          return new CurrencyRate(
+            currencyCode,
+            parseFloat(middleRate),
+            parseFloat(middleRate)
+          );
+        })
+        .filter((rate) => rate !== null);
+
+      if (rates.length === 0) {
+        console.warn("No valid rates found for CNB");
+        return null;
+      }
+
+      return new Bank(data.banka, new CurrencyCode("CZK"), rates, data.denc);
+    }
+
+    // Regular handling for other banks
     const rates = Object.entries(data.kurzy)
       .map(([currency, rateData]) => {
         const currencyCode = CurrencyCode.create(currency);
         if (!currencyCode) return null;
 
-        // Handle both dev_nakup/dev_prodej and val_nakup/val_prodej
         const buyRate =
           rateData.dev_nakup !== null && rateData.dev_nakup !== undefined
             ? parseFloat(rateData.dev_nakup)
             : rateData.val_nakup !== null && rateData.val_nakup !== undefined
             ? parseFloat(rateData.val_nakup)
-            : rateData.dev_stred !== null && rateData.dev_stred !== undefined
-            ? parseFloat(rateData.dev_stred)
-            : rateData.val_stred !== null && rateData.val_stred !== undefined
-            ? parseFloat(rateData.val_stred)
             : null;
 
         const sellRate =
@@ -41,10 +64,6 @@ function processBankData(data) {
             ? parseFloat(rateData.dev_prodej)
             : rateData.val_prodej !== null && rateData.val_prodej !== undefined
             ? parseFloat(rateData.val_prodej)
-            : rateData.dev_stred !== null && rateData.dev_stred !== undefined
-            ? parseFloat(rateData.dev_stred)
-            : rateData.val_stred !== null && rateData.val_stred !== undefined
-            ? parseFloat(rateData.val_stred)
             : null;
 
         if (buyRate === null || sellRate === null) return null;
