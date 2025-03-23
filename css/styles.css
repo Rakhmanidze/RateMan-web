@@ -2,17 +2,40 @@
   --page-background: #e0e0e0;
   --bank-background: #ffffff;
   --bank-border: #d0d0d0;
+  --bank-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --footer-text: #666666;
 }
 
 body {
   background: var(--page-background);
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .bank-section {
   background: var(--bank-background);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--bank-shadow);
   border-radius: 8px;
-  padding: 20px;
+  padding: 10px;
   margin: 15px 0;
   border: 1px solid var(--bank-border);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+footer {
+  margin-top: 30px;
+  text-align: center;
+  color: var(--footer-text);
+  font-size: 0.9em;
+}
+
+footer a {
+  color: var(--footer-text);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
