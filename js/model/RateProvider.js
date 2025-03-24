@@ -1,10 +1,10 @@
 import { CurrencyCode } from "./CurrencyCode.js";
 import { CurrencyRate } from "./CurrencyRate.js";
 
-export class Bank {
+export class RateProvider {
   constructor(name, baseCurrency, rates, ratesDate) {
     if (typeof name !== "string") {
-      throw new Error("Bank name must be a string");
+      throw new Error("RateProvider name must be a string");
     }
     if (!(baseCurrency instanceof CurrencyCode)) {
       throw new Error("baseCurrency must be an instance of CurrencyCode");

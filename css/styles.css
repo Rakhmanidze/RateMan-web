@@ -1,8 +1,8 @@
 :root {
   --page-background: #e0e0e0;
-  --bank-background: #ffffff;
-  --bank-border: #d0d0d0;
-  --bank-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --provider-background: #ffffff;
+  --provider-border: #d0d0d0;
+  --provider-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   --footer-text: #666666;
 }
 
@@ -13,13 +13,13 @@ body {
   padding: 20px;
 }
 
-.bank-section {
-  background: var(--bank-background);
-  box-shadow: var(--bank-shadow);
+.provider-section {
+  background: var(--provider-background);
+  box-shadow: var(--provider-shadow);
   border-radius: 8px;
   padding: 10px;
   margin: 15px 0;
-  border: 1px solid var(--bank-border);
+  border: 1px solid var(--provider-border);
   width: 100%;
   box-sizing: border-box;
 }

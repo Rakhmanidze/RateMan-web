@@ -1,20 +1,30 @@
 import { CurrencyCode } from "../model/CurrencyCode.js";
 import { CurrencyRate } from "../model/CurrencyRate.js";
-import { Bank } from "../model/Bank.js";
+import { RateProvider } from "../model/RateProvider.js";
 
-async function fetchAllBankRatesData() {
-  const response = await fetch(`https://data.kurzy.cz/json/meny/b[-1].json`, {
-    method: "GET",
-  });
-  if (!response.ok) {
-    throw new Error(`Status code isn't 200: ${response.status}`);
+async function fetchAllProviderRatesData() {
+  try {
+    const response = await fetch(`https://data.kurzy.cz/json/meny/b[-1].json`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching rates data:", error);
+    throw error;
   }
-  return response.json();
 }
 
-function processBankData(data) {
+function processProviderData(data) {
   if (!data || !data.kurzy) {
-    console.warn("Invalid bank data received");
+    console.warn("Invalid provider data received");
     return null;
   }
 
@@ -43,10 +53,15 @@ function processBankData(data) {
         return null;
       }
 
-      return new Bank(data.banka, new CurrencyCode("CZK"), rates, data.denc);
+      return new RateProvider(
+        data.banka,
+        new CurrencyCode("CZK"),
+        rates,
+        data.denc
+      );
     }
 
-    // Regular handling for other banks
+    // Regular handling for other providers
     const rates = Object.entries(data.kurzy)
       .map(([currency, rateData]) => {
         const currencyCode = CurrencyCode.create(currency);
@@ -73,30 +88,36 @@ function processBankData(data) {
       .filter((rate) => rate !== null);
 
     if (rates.length === 0) {
-      console.warn(`No valid rates found for bank: ${data.banka}`);
+      console.warn(`No valid rates found for provider: ${data.banka}`);
       return null;
     }
 
-    return new Bank(data.banka, new CurrencyCode("CZK"), rates, data.denc);
+    return new RateProvider(
+      data.banka,
+      new CurrencyCode("CZK"),
+      rates,
+      data.denc
+    );
   } catch (error) {
-    console.error(`Error processing bank ${data.banka}:`, error);
+    console.error(`Error processing provider ${data.banka}:`, error);
     return null;
   }
 }
 
-export async function fetchAndProcessAllBankRates() {
+export async function fetchAndProcessAllProviderRates() {
   try {
-    const allBankData = await fetchAllBankRatesData();
-    const bankDataArray = Array.isArray(allBankData)
-      ? allBankData
-      : [allBankData];
-    const banks = bankDataArray
-      .map((bankData) => processBankData(bankData))
-      .filter((bank) => bank !== null);
+    const allProviderData = await fetchAllProviderRatesData();
+    const providerDataArray = Array.isArray(allProviderData)
+      ? allProviderData
+      : [allProviderData];
 
-    return banks;
+    const providers = providerDataArray
+      .map((providerData) => processProviderData(providerData))
+      .filter((provider) => provider !== null);
+
+    return providers;
   } catch (error) {
-    console.error("Error fetching or processing bank rates:", error);
+    console.error("Error fetching provider rates:", error);
     return [];
   }
 }

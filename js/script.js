@@ -1,25 +1,25 @@
-import { fetchAndProcessAllBankRates } from "./service/bankService.js";
-import { BankDisplay } from "./view/BankDisplay.js";
 import { SearchHandler } from "./view/SearchHandler.js";
-import { BankFilterService } from "./service/bankFilterService.js";
+import { RateProviderFilterService } from "./service/rateProviderFilterService.js";
+import { RateProviderDisplay } from "./view/rateProviderDisplay.js";
+import { fetchAndProcessAllProviderRates } from "./service/RateProviderService.js";
 
-const bankDisplay = new BankDisplay("bank-display");
-const bankFilterService = new BankFilterService();
-const searchHandler = new SearchHandler(bankFilterService, bankDisplay);
+const providerDisplay = new RateProviderDisplay("provider-display");
+const providerFilterService = new RateProviderFilterService();
+const searchHandler = new SearchHandler(providerFilterService, providerDisplay);
 
-function displayBanksData(banks) {
-  if (banks.length > 0) {
-    for (let bank of banks) {
-      bankDisplay.displayBank(bank);
+function displayProvidersData(providers) {
+  if (providers.length > 0) {
+    for (let provider of providers) {
+      providerDisplay.displayProvider(provider);
     }
   }
 }
 
-fetchAndProcessAllBankRates()
-  .then((banks) => {
-    console.log(`Successfully processed ${banks.length} banks`);
-    bankFilterService.setBanks(banks);
-    displayBanksData(banks);
+fetchAndProcessAllProviderRates()
+  .then((providers) => {
+    console.log(`Successfully processed ${providers.length} providers`);
+    providerFilterService.setProviders(providers);
+    displayProvidersData(providers);
   })
   .catch((error) => {
     console.error("Error in main process:", error);

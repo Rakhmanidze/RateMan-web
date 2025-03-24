@@ -1,35 +1,38 @@
-import { BankFilterService } from "../service/bankFilterService.js";
+import { RateProviderFilterService } from "../service/RateProviderFilterService.js";
+import { RateProviderDisplay } from "../view/rateProviderDisplay.js";
 
 export class SearchHandler {
-  constructor(bankFilterService, bankDisplay) {
-    this.bankSearchInput = document.getElementById("bank-search");
+  constructor(providerFilterService, providerDisplay) {
+    this.providerSearchInput = document.getElementById("provider-search");
     this.currencyPairInput = document.getElementById("select-pair");
-    this.bankFilterService = bankFilterService;
-    this.bankDisplay = bankDisplay;
+    this.providerFilterService = providerFilterService;
+    this.providerDisplay = providerDisplay;
     this.noResultsMessage = document.createElement("div");
     this.noResultsMessage.className = "no-results";
     this.setupEventListeners();
   }
 
   setupEventListeners() {
-    this.bankSearchInput.addEventListener("input", (event) => {
+    this.providerSearchInput.addEventListener("input", (event) => {
       try {
-        const searchedBankName = event.target.value.toLowerCase();
-        console.log("Searching for bank:", searchedBankName);
-        const searchedBank =
-          this.bankFilterService.searchBank(searchedBankName);
+        const searchedProviderName = event.target.value.toLowerCase();
+        console.log("Searching for provider:", searchedProviderName);
+        const searchedProvider =
+          this.providerFilterService.searchProvider(searchedProviderName);
 
-        this.bankDisplay.clearBanks();
-        if (!searchedBank || searchedBank.length === 0) {
+        this.providerDisplay.clearProviders();
+        if (!searchedProvider || searchedProvider.length === 0) {
           this.noResultsMessage.textContent = "No results found";
-          this.bankDisplay.container.appendChild(this.noResultsMessage);
+          this.providerDisplay.container.appendChild(this.noResultsMessage);
         } else {
           this.noResultsMessage.remove();
-          searchedBank.forEach((bank) => this.bankDisplay.displayBank(bank));
+          searchedProvider.forEach((provider) =>
+            this.providerDisplay.displayProvider(provider)
+          );
         }
       } catch (error) {
-        console.error("Error in bank search:", error);
-        this.bankDisplay.clearBanks();
+        console.error("Error in provider search:", error);
+        this.providerDisplay.clearProviders();
       }
     });
 
@@ -41,8 +44,6 @@ export class SearchHandler {
     });
   }
 }
-
-//git commit -m "Rename title of the page to RateMan. Add No results found for message for search."
 
 //TODO: rename Bank class and all related files to RateProvider (try to add variable to that class as type('bank', 'exchange', 'crypto')); git push
 
