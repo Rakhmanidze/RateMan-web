@@ -2,7 +2,7 @@ import { CurrencyCode } from "./CurrencyCode.js";
 import { CurrencyRate } from "./CurrencyRate.js";
 
 export class RateProvider {
-  constructor(name, baseCurrency, rates, ratesDate) {
+  constructor(name, baseCurrency, rates, ratesDate, phoneNumber) {
     if (typeof name !== "string") {
       throw new Error("RateProvider name must be a string");
     }
@@ -22,6 +22,7 @@ export class RateProvider {
     this.baseCurrency = baseCurrency;
     this.rates = rates;
     this.ratesDate = ratesDate;
+    this.phoneNumber = phoneNumber;
   }
 
   getName() {
@@ -47,5 +48,9 @@ export class RateProvider {
 
   getRatesDate() {
     return this.ratesDate;
+  }
+
+  getPhoneNumber() {
+    return this.phoneNumber;
   }
 }

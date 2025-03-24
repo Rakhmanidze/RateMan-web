@@ -24,7 +24,7 @@ export const phoneNumberData = [
     phoneNumber: "+420 602 453 201",
   },
   {
-    name: "MONETA Money Bank",
+    name: "MONETA",
     phoneNumber: "+420 224 443 636",
   },
   {
@@ -56,7 +56,7 @@ export const phoneNumberData = [
     phoneNumber: "+420 224 411 111",
   },
   {
-    name: "Air Bank",
+    name: "Air bank",
     phoneNumber: "+420 515 202 202",
   },
   {
@@ -66,5 +66,9 @@ export const phoneNumberData = [
   {
     name: "Česká spořitelna",
     phoneNumber: "+420 277 207 207",
+  },
+  {
+    name: "Trinity Bank",
+    phoneNumber: "+420 800 678 678",
   },
 ];

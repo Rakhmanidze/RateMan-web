@@ -15,7 +15,7 @@ export class RateProviderDisplay {
     const header = document.createElement("h2");
     header.textContent = `${provider.getName()} - ${provider
       .getBaseCurrency()
-      .getCode()} - ${provider.getRatesDate()}`;
+      .getCode()} - ${provider.getRatesDate()} - ${provider.getPhoneNumber()}`;
     providerSection.appendChild(header);
 
     const table = document.createElement("table");

@@ -45,7 +45,8 @@ export class SearchHandler {
   }
 }
 
-//TODO: rename Bank class and all related files to RateProvider (try to add variable to that class as type('bank', 'exchange', 'crypto')); git push
+//git commit -m "Remove from rate providers two not needed banks. Display phone number of rate provider. Add phone number to Trinity Bank."
+//TODO:  add variable to that class as type('bank', 'exchange', 'crypto'));
 
 //TODO: remove Poštovní spořitelna from the list of banks cause its CSOB.
 

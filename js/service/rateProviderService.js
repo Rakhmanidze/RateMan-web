@@ -1,6 +1,7 @@
 import { CurrencyCode } from "../model/CurrencyCode.js";
 import { CurrencyRate } from "../model/CurrencyRate.js";
 import { RateProvider } from "../model/RateProvider.js";
+import { phoneNumberData } from "../../sources/phoneNumberData.js";
 
 async function fetchAllProviderRatesData() {
   try {
@@ -29,7 +30,12 @@ function processProviderData(data) {
   }
 
   try {
-    // Special handling for CNB
+    if (
+      data.banka === "Turecká centrální banka" ||
+      data.banka === "Poštovní spořitelna"
+    ) {
+      return null;
+    }
     if (data.banka === "Česká národní banka") {
       const rates = Object.entries(data.kurzy)
         .map(([currency, rateData]) => {
@@ -53,11 +59,19 @@ function processProviderData(data) {
         return null;
       }
 
+      let phoneNumber = null;
+      for (let provider of phoneNumberData) {
+        if (provider.name === data.banka) {
+          phoneNumber = provider.phoneNumber;
+        }
+      }
+
       return new RateProvider(
         data.banka,
         new CurrencyCode("CZK"),
         rates,
-        data.denc
+        data.denc,
+        phoneNumber
       );
     }
 
@@ -92,11 +106,19 @@ function processProviderData(data) {
       return null;
     }
 
+    let phoneNumber = null;
+    for (let provider of phoneNumberData) {
+      if (provider.name === data.banka) {
+        phoneNumber = provider.phoneNumber;
+      }
+    }
+
     return new RateProvider(
       data.banka,
       new CurrencyCode("CZK"),
       rates,
-      data.denc
+      data.denc,
+      phoneNumber
     );
   } catch (error) {
     console.error(`Error processing provider ${data.banka}:`, error);
