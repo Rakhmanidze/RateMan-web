@@ -1,6 +1,6 @@
 import { SearchHandler } from "./view/SearchHandler.js";
 import { RateProviderFilterService } from "./service/rateProviderFilterService.js";
-import { RateProviderDisplay } from "./view/rateProviderDisplay.js";
+import { RateProviderDisplay } from "./view/RateProviderDisplay.js";
 import { fetchAndProcessAllProviderRates } from "./service/RateProviderService.js";
 
 const providerDisplay = new RateProviderDisplay("provider-display");
