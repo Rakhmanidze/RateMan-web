@@ -9,18 +9,20 @@
 </head>
 
 <body>
-    <h1>Exchange Rates</h1>
-    <div class="search-and-filter">
-        <input type="text" id="provider-search" placeholder="Search providers...">
-        <input type="text" id="select-pair" placeholder="Select pair (e.g. CZK/EUR)">
-    </div>
-    <div class="sorting-options">
-        <input type="radio" id="default-sorting" name="provider-filter" value="all" checked>
-        <label for="default-sorting">Default</label>
-        <input type="radio" id="best-rates" name="provider-filter" value="best">
-        <label for="best-rates">Sort by Best Rate</label>
-    </div>
-    <div id="provider-display"></div>
+    <main>
+        <h1>Exchange Rates</h1>
+        <div class="search-and-filter">
+            <input type="text" id="provider-search" placeholder="Search providers...">
+            <input type="text" id="select-pair" placeholder="Select pair (e.g. CZK/EUR)">
+        </div>
+        <div class="sorting-options">
+            <input type="radio" id="default-sorting" name="provider-filter" value="all" checked>
+            <label for="default-sorting">Default</label>
+            <input type="radio" id="best-rates" name="provider-filter" value="best">
+            <label for="best-rates">Sort by Best Rate</label>
+        </div>
+        <div id="provider-display"></div>
+    </main>
 
     <footer>
         Data from kurzy.cz, licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY
