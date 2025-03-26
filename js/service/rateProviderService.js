@@ -1,11 +1,12 @@
 import { CurrencyCode } from "../model/CurrencyCode.js";
 import { CurrencyRate } from "../model/CurrencyRate.js";
 import { RateProvider } from "../model/RateProvider.js";
-import { phoneNumberData } from "../../sources/phoneNumberData.js";
+import { phoneNumberData } from "../../sources/config/phoneNumberData.js";
+import { API_URL } from "../../sources/config/apiConfig.js";
 
 async function fetchAllProviderRatesData() {
   try {
-    const response = await fetch(`https://data.kurzy.cz/json/meny/b[-1].json`, {
+    const response = await fetch(API_URL, {
       method: "GET",
       headers: {
         Accept: "application/json",

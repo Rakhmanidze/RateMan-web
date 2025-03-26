@@ -1,6 +1,3 @@
-import { RateProviderFilterService } from "../service/RateProviderFilterService.js";
-import { RateProviderDisplay } from "./RateProviderDisplay.js";
-
 export class SearchHandler {
   constructor(providerFilterService, providerDisplay) {
     this.providerSearchInput = document.getElementById("provider-search");
@@ -16,7 +13,6 @@ export class SearchHandler {
     this.providerSearchInput.addEventListener("input", (event) => {
       try {
         const searchedProviderName = event.target.value.toLowerCase();
-        console.log("Searching for provider:", searchedProviderName);
         const searchedProvider =
           this.providerFilterService.searchProvider(searchedProviderName);
 
@@ -45,3 +41,4 @@ export class SearchHandler {
 }
 
 //TODO:  add variable to that class as type('bank', 'exchange', 'crypto'));
+//git commit -m "Put api url in config file."

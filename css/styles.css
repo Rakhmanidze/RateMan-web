@@ -92,21 +92,6 @@ footer a:hover {
   cursor: pointer;
 }
 
-/* .loading {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--secondary-color);
-  border-radius: 50%;
-  border-top-color: transparent;
-  animation: spin 1s linear infinite;
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
 .no-results {
   padding: 15px;
   text-align: center;
@@ -115,4 +100,42 @@ footer a:hover {
   margin: 10px 0;
 }
 
-/* git commit -m "implement css to no results found container, sorting radio buttons. Correct footer position." */
+@media (max-width: 1200px) {
+  body {
+    font-size: 15px;
+  }
+
+  footer {
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 992px) {
+  body {
+    font-size: 14px;
+  }
+
+  footer {
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 13px;
+  }
+
+  footer {
+    font-size: 0.75em;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+
+  footer {
+    font-size: 0.7em;
+  }
+}
