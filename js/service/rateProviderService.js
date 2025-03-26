@@ -16,12 +16,23 @@ async function fetchAllProviderRatesData() {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
+    const data = await response.json();
 
-    return response.json();
+    localStorage.setItem("apiData", JSON.stringify(data));
+
+    return data;
   } catch (error) {
     console.error("Error fetching rates data:", error);
-    throw error;
+    return loadDataFromLocalStorage();
   }
+}
+
+function loadDataFromLocalStorage() {
+  const storedData = localStorage.getItem("apiData");
+  if (storedData) {
+    return JSON.parse(storedData);
+  }
+  return null;
 }
 
 function processProviderData(data) {
