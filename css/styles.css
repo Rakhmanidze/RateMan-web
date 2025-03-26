@@ -33,6 +33,40 @@ main {
   border-color: var(--input-focus-border);
 }
 
+.sorting-container {
+  margin: 15px 0;
+}
+
+.controls-label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.sort-options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sort-btn {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sort-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.sort-btn.active {
+  background-color: #e0e0e0;
+  border-color: #999;
+  font-weight: 500;
+}
+
 .provider-section {
   background: var(--provider-background);
   box-shadow: var(--provider-shadow);
@@ -68,6 +102,14 @@ th {
   font-weight: 600;
 }
 
+.no-results {
+  padding: 15px;
+  text-align: center;
+  background: var(--not-found-bg);
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
 footer {
   margin-top: 30px;
   text-align: center;
@@ -82,22 +124,6 @@ footer a {
 
 footer a:hover {
   text-decoration: underline;
-}
-
-.sorting-options {
-  margin: 20px 0;
-}
-.sorting-options label {
-  margin-right: 20px;
-  cursor: pointer;
-}
-
-.no-results {
-  padding: 15px;
-  text-align: center;
-  background: var(--not-found-bg);
-  border-radius: 4px;
-  margin: 10px 0;
 }
 
 @media (max-width: 1200px) {

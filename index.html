@@ -10,18 +10,23 @@
 
 <body>
     <main>
-        <h1>Exchange Rates</h1>
+        <h1>Prague Currency Rates</h1>
         <div class="search-and-filter">
             <input type="text" id="provider-search" placeholder="Search providers..." pattern="[a-zA-Z0-9\s]*" required>
             <input type="text" id="select-pair" placeholder="Select pair (e.g. CZK/EUR)" pattern="[a-zA-Z0-9\s]*"
                 required>
         </div>
-        <div class="sorting-options">
-            <input type="radio" id="default-sorting" name="provider-filter" value="all" checked>
-            <label for="default-sorting">Default</label>
-            <input type="radio" id="best-rates" name="provider-filter" value="best">
-            <label for="best-rates">Sort by Best Rate</label>
+
+        <div class="sorting-container">
+            <h3 class="controls-label">Sort By</h3>
+            <div class="sort-options">
+                <button class="sort-btn" data-sort="default">All</button>
+                <button class="sort-btn" data-sort="banks">Banks</button>
+                <button class="sort-btn" data-sort="exchanges">Exchanges</button>
+                <button class="sort-btn" data-sort="best-rate">Best Rate</button>
+            </div>
         </div>
+
         <div id="provider-display"></div>
     </main>
 
