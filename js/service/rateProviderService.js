@@ -3,6 +3,7 @@ import { CurrencyRate } from "../model/CurrencyRate.js";
 import { RateProvider } from "../model/RateProvider.js";
 import { phoneNumberData } from "../../sources/config/phoneNumberData.js";
 import { API_URL } from "../../sources/config/apiConfig.js";
+import { bankNames } from "../../sources/config/bankNames.js";
 
 async function fetchAllProviderRatesData() {
   try {
@@ -48,6 +49,8 @@ function processProviderData(data) {
     ) {
       return null;
     }
+    const isBank = bankNames.includes(data.banka);
+    const type = isBank ? "bank" : "exchange";
     if (data.banka === "Česká národní banka") {
       const rates = Object.entries(data.kurzy)
         .map(([currency, rateData]) => {
@@ -83,7 +86,8 @@ function processProviderData(data) {
         new CurrencyCode("CZK"),
         rates,
         data.denc,
-        phoneNumber
+        phoneNumber,
+        type
       );
     }
 
@@ -130,7 +134,8 @@ function processProviderData(data) {
       new CurrencyCode("CZK"),
       rates,
       data.denc,
-      phoneNumber
+      phoneNumber,
+      type
     );
   } catch (error) {
     console.error(`Error processing provider ${data.banka}:`, error);
