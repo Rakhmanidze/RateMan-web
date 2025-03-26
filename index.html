@@ -12,8 +12,9 @@
     <main>
         <h1>Exchange Rates</h1>
         <div class="search-and-filter">
-            <input type="text" id="provider-search" placeholder="Search providers...">
-            <input type="text" id="select-pair" placeholder="Select pair (e.g. CZK/EUR)">
+            <input type="text" id="provider-search" placeholder="Search providers..." pattern="[a-zA-Z0-9\s]*" required>
+            <input type="text" id="select-pair" placeholder="Select pair (e.g. CZK/EUR)" pattern="[a-zA-Z0-9\s]*"
+                required>
         </div>
         <div class="sorting-options">
             <input type="radio" id="default-sorting" name="provider-filter" value="all" checked>
