@@ -1,64 +1,84 @@
 export class SearchHandler {
-  constructor(providerFilterService, providerDisplay) {
+  constructor(providerFilterService, providerDisplay, filterState) {
     this.providerSearchInput = document.getElementById("provider-search");
     this.currencyPairInput = document.getElementById("select-pair");
     this.providerFilterDropdown = document.getElementById("provider-filter");
+    // this.sortButton = document.querySelector("sort-btn");
     this.providerFilterService = providerFilterService;
     this.providerDisplay = providerDisplay;
+    this.filterState = filterState;
     this.noResultsMessage = document.createElement("div");
     this.noResultsMessage.className = "no-results";
+
+    this.initializeFromState();
     this.setupEventListeners();
+  }
+
+  initializeFromState() {
+    this.providerSearchInput.value = this.filterState.getSearchedProviderName();
+    this.providerFilterDropdown.value = this.filterState.getProviderType();
+    this.currencyPairInput.value = this.filterState.getCurrencyPair();
+    // this.sortButton.dataset.sort = this.filterState.getSortBy();
+
+    this.applyAllFilters();
   }
 
   setupEventListeners() {
     this.providerSearchInput.addEventListener("input", (event) => {
-      this.handleProviderSearch(event.target.value);
+      this.filterState.setSearchedProviderName(event.target.value);
+      this.applyAllFilters();
     });
 
     this.currencyPairInput.addEventListener("input", (event) => {
-      const currencyPair = event.target.value.toUpperCase();
-      console.log("Selected currency pair:", currencyPair);
+      this.filterState.setCurrencyPair(event.target.value);
+      this.applyAllFilters();
       // TODO: Implement currency pair filtering
     });
 
     this.providerFilterDropdown.addEventListener("change", (event) => {
-      this.handleProviderTypeFilter(event.target.value);
+      this.filterState.setProviderType(event.target.value);
+      this.applyAllFilters();
     });
+
+    // this.sortButton.addEventListener("click", (event) => {
+    //   this.filterState.setSortBy(event.target.value);
+    //   this.applyAllFilters(); // TODO:
+    // });
   }
 
-  handleProviderSearch(searchedProviderName) {
-    try {
-      const searchTerm = searchedProviderName.toLowerCase();
-      const filteredProviders =
-        this.providerFilterService.searchProvider(searchTerm);
-      this.updateDisplay(filteredProviders);
-    } catch (error) {
-      console.error("Error in provider search:", error);
-      this.providerDisplay.clearProviders();
-    }
-  }
-
-  handleProviderTypeFilter(selectedType) {
+  applyAllFilters() {
     try {
       let filteredProviders = this.providerFilterService.originalProviders;
 
-      if (selectedType !== "all") {
+      const providerType = this.filterState.getProviderType();
+      if (providerType !== "all") {
         filteredProviders = filteredProviders.filter((provider) => {
-          const providerType = provider.getType();
-
-          if (selectedType == "banks") {
-            return providerType == "bank";
-          } else if (selectedType == "exchanges") {
-            return providerType == "exchange";
-          } else if (selectedType == "crypto-exchanges") {
-            return providerType == "crypto-exchange";
+          const currentProviderType = provider.getType();
+          switch (providerType) {
+            case "banks":
+              return currentProviderType === "bank";
+            case "exchanges":
+              return currentProviderType === "exchange";
+            case "crypto-exchanges":
+              return currentProviderType === "crypto-exchange";
+            default:
+              return true;
           }
         });
       }
 
+      const searchTerm = this.filterState
+        .getSearchedProviderName()
+        .toLowerCase();
+      if (searchTerm) {
+        filteredProviders = filteredProviders.filter((provider) =>
+          provider.getName().toLowerCase().includes(searchTerm)
+        );
+      }
+
       this.updateDisplay(filteredProviders);
     } catch (error) {
-      console.error("Error in provider type filter:", error);
+      console.error("Error applying filters:", error);
       this.providerDisplay.clearProviders();
     }
   }
@@ -76,37 +96,4 @@ export class SearchHandler {
       );
     }
   }
-
-  // setupEventListeners() {
-  //   this.providerSearchInput.addEventListener("input", (event) => {
-  //     try {
-  //       const searchedProviderName = event.target.value.toLowerCase();
-  //       const searchedProvider =
-  //         this.providerFilterService.searchProvider(searchedProviderName);
-
-  //       this.providerDisplay.clearProviders();
-  //       if (!searchedProvider || searchedProvider.length === 0) {
-  //         this.noResultsMessage.textContent = "No results found";
-  //         this.providerDisplay.container.appendChild(this.noResultsMessage);
-  //       } else {
-  //         this.noResultsMessage.remove();
-  //         searchedProvider.forEach((provider) =>
-  //           this.providerDisplay.displayProvider(provider)
-  //         );
-  //       }
-  //     } catch (error) {
-  //       console.error("Error in provider search:", error);
-  //       this.providerDisplay.clearProviders();
-  //     }
-  //   });
-
-  //   this.currencyPairInput.addEventListener("input", (event) => {
-  //     const currencyPair = event.target.value.toUpperCase();
-  //     console.log("Selected currency pair:", currencyPair);
-  //     // TODO: Implement currency pair filtering
-  //   });
-  // }
 }
-
-//TODO:  add variable to that class as type('bank', 'exchange', 'crypto'));
-//git commit -m "Put api url in config file."

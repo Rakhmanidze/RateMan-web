@@ -10,4 +10,5 @@ export const bankNames = [
   "Max banka",
   "Trinity Bank",
   "MONETA",
+  "Oberbank AG",
 ];

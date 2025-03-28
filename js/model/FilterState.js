@@ -7,12 +7,12 @@ export class FilterState {
   }
 
   setSearchedProviderName(name) {
-    this.searchedProviderName = name;
+    this.searchProviderName = name;
     localStorage.setItem("searchProviderName", name);
   }
 
   getSearchedProviderName() {
-    return this.searchedProviderName;
+    return this.searchProviderName;
   }
 
   setCurrencyPair(pair) {
@@ -40,5 +40,12 @@ export class FilterState {
 
   getSortBy() {
     return this.sortBy;
+  }
+
+  clearAllFilters() {
+    this.setSearchedProviderName("");
+    this.setCurrencyPair("");
+    this.setProviderType("all");
+    this.setSortBy("noRateSorting");
   }
 }
