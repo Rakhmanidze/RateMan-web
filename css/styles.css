@@ -15,6 +15,7 @@ body {
   max-width: 700px;
   margin: 0 auto;
   padding: 20px;
+  font-size: 16px;
 }
 
 main {
@@ -66,9 +67,17 @@ main {
   cursor: pointer;
   transition: border-color 0.3s ease, background-color 0.2s ease;
   height: 36px;
-  width: 135px;
   box-sizing: border-box;
-  /* line-height: 1; */
+  line-height: 1;
+}
+
+.provider-select {
+  width: 135px;
+}
+
+.provider-select:focus {
+  outline: none;
+  border-color: var(--input-focus-border);
 }
 
 .sort-btn {
@@ -148,19 +157,11 @@ footer a:hover {
   body {
     font-size: 15px;
   }
-
-  footer {
-    font-size: 0.85em;
-  }
 }
 
 @media (max-width: 992px) {
   body {
     font-size: 14px;
-  }
-
-  footer {
-    font-size: 0.8em;
   }
 }
 
@@ -168,18 +169,10 @@ footer a:hover {
   body {
     font-size: 13px;
   }
-
-  footer {
-    font-size: 0.75em;
-  }
 }
 
 @media (max-width: 480px) {
   body {
     font-size: 12px;
-  }
-
-  footer {
-    font-size: 0.7em;
   }
 }
