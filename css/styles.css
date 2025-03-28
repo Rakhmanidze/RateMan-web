@@ -39,23 +39,40 @@ main {
 
 .controls-label {
   font-weight: bold;
-  margin-bottom: 8px;
+  margin: 0;
+  font-size: 1rem;
 }
 
 .sort-options {
   display: flex;
-  gap: 8px;
+  gap: 7px;
   flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.sort-by-section {
+  display: flex;
   align-items: center;
+  gap: 7px;
+}
+
+.sort-btn,
+.provider-select {
+  padding: 8px 12px;
+  border: 1px solid var(--container-border);
+  border-radius: 4px;
+  background-color: var(--provider-background);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.2s ease;
+  height: 36px;
+  width: 135px;
+  box-sizing: border-box;
+  /* line-height: 1; */
 }
 
 .sort-btn {
-  padding: 8px 16px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  width: 96px;
 }
 
 .sort-btn:hover {
@@ -66,13 +83,6 @@ main {
   background-color: #e0e0e0;
   border-color: #999;
   font-weight: 500;
-}
-
-.separator {
-  width: 2px;
-  height: 24px;
-  background-color: #999;
-  margin: 0 1px;
 }
 
 .provider-section {
