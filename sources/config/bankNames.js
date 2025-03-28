@@ -9,4 +9,5 @@ export const bankNames = [
   "Air bank",
   "Max banka",
   "Trinity Bank",
+  "MONETA",
 ];

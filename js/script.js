@@ -5,7 +5,12 @@ import { fetchAndProcessAllProviderRates } from "./service/RateProviderService.j
 
 const providerDisplay = new RateProviderDisplay("provider-display");
 const providerFilterService = new RateProviderFilterService();
-const searchHandler = new SearchHandler(providerFilterService, providerDisplay);
+const filterState = new FilterState();
+const searchHandler = new SearchHandler(
+  providerFilterService,
+  providerDisplay,
+  filterState
+);
 
 function displayProvidersData(providers) {
   if (providers.length > 0) {
