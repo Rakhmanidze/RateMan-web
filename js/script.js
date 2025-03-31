@@ -23,7 +23,6 @@ function displayProvidersData(providers) {
 
 fetchAndProcessAllProviderRates()
   .then((providers) => {
-    console.log(`Successfully processed ${providers.length} providers`);
     providerFilterService.setProviders(providers);
     searchHandler.applyAllFilters();
   })
