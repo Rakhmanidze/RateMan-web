@@ -176,3 +176,10 @@ footer a:hover {
     font-size: 12px;
   }
 }
+
+@media print {
+  .search-and-filter input,
+  .sorting-container {
+    display: none;
+  }
+}

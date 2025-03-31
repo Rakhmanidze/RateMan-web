@@ -1,4 +1,4 @@
-export class SearchHandler {
+export class FilterHandler {
   constructor(providerFilterService, providerDisplay, filterState) {
     this.providerSearchInput = document.getElementById("provider-search");
     this.currencyPairInput = document.getElementById("select-pair");
