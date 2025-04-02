@@ -191,8 +191,12 @@ footer a:hover {
 }
 
 @media print {
+  @page {
+    margin: 0;
+  }
   .search-and-filter input,
-  .sorting-container {
+  .sorting-container,
+  footer {
     display: none;
   }
 }
