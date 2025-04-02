@@ -13,8 +13,6 @@
         <h1>Prague Currency Rates</h1>
         <div class="search-and-filter">
             <input type="text" id="provider-search" placeholder="Search providers..." pattern="[a-zA-Z0-9\s]*" required>
-            <input type="text" id="select-pair" placeholder="Select pair (e.g. CZK/EUR)" pattern="[a-zA-Z0-9\s]*"
-                required>
         </div>
 
         <div class="sorting-container">
@@ -32,6 +30,12 @@
                             <option value="exchanges">Exchanges</option>
                             <option value="crypto-exchanges">Crypto exchanges</option>
                         </select>
+                    </div>
+                </div>
+
+                <div class="currency-pair-combobox">
+                    <input type="text" id="select-pair" placeholder="All currencies" autocomplete="off">
+                    <div id="currency-pair-dropdown" class="currency-pair-options">
                     </div>
                 </div>
             </div>
