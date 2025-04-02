@@ -3,6 +3,21 @@ export class RateProviderDisplay {
     this.container = document.getElementById(containerId);
   }
 
+  createTableHeaders(isCNB) {
+    const headers = isCNB
+      ? ["Currency", "Middle Rate"]
+      : ["Currency", "Buy Rate", "Sell Rate"];
+    const thead = document.createElement("thead");
+    const headerRow = document.createElement("tr");
+    headers.forEach((text) => {
+      const th = document.createElement("th");
+      th.textContent = text;
+      headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    return thead;
+  }
+
   displayProvider(provider) {
     if (!this.container) {
       console.error("Container not found");
@@ -25,28 +40,9 @@ export class RateProviderDisplay {
     providerSection.appendChild(header);
 
     const table = document.createElement("table");
-    const thead = document.createElement("thead");
-    const headerRow = document.createElement("tr");
-
-    // Special handling for CNB
-    if (provider.getName() === "Česká národní banka") {
-      const headers = ["Currency", "Middle Rate"];
-      headers.forEach((headerText) => {
-        const th = document.createElement("th");
-        th.textContent = headerText;
-        headerRow.appendChild(th);
-      });
-    } else {
-      const headers = ["Currency", "Buy Rate", "Sell Rate"];
-      headers.forEach((headerText) => {
-        const th = document.createElement("th");
-        th.textContent = headerText;
-        headerRow.appendChild(th);
-      });
-    }
-
-    thead.appendChild(headerRow);
-    table.appendChild(thead);
+    table.appendChild(
+      this.createTableHeaders(provider.getName() === "Česká národní banka")
+    );
 
     const tbody = document.createElement("tbody");
     provider.getAllRates().forEach((rate) => {
