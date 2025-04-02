@@ -36,6 +36,59 @@ function loadDataFromLocalStorage() {
   return null;
 }
 
+function createRates(kurzy, isCNB) {
+  return Object.entries(kurzy)
+    .map(([currency, rateData]) => {
+      const currencyCode = CurrencyCode.create(currency);
+      if (!currencyCode) return null;
+
+      if (isCNB) {
+        const middleRate = rateData.dev_stred;
+        if (middleRate === null || middleRate === undefined) return null;
+        return new CurrencyRate(
+          currencyCode,
+          parseFloat(middleRate),
+          parseFloat(middleRate)
+        );
+      }
+
+      const buyRate =
+        rateData.dev_nakup !== null && rateData.dev_nakup !== undefined
+          ? parseFloat(rateData.dev_nakup)
+          : rateData.val_nakup !== null && rateData.val_nakup !== undefined
+          ? parseFloat(rateData.val_nakup)
+          : null;
+
+      const sellRate =
+        rateData.dev_prodej !== null && rateData.dev_prodej !== undefined
+          ? parseFloat(rateData.dev_prodej)
+          : rateData.val_prodej !== null && rateData.val_prodej !== undefined
+          ? parseFloat(rateData.val_prodej)
+          : null;
+
+      if (buyRate === null || sellRate === null) return null;
+      return new CurrencyRate(currencyCode, buyRate, sellRate);
+    })
+    .filter((rate) => rate !== null);
+}
+
+function createProvider(name, rates, date, phoneNumber, isBank) {
+  const type = isBank ? "bank" : "exchange";
+  return new RateProvider(
+    name,
+    new CurrencyCode("CZK"),
+    rates,
+    date,
+    phoneNumber,
+    type
+  );
+}
+
+function getPhoneNumber(providerName, phoneData) {
+  const provider = phoneData.find((p) => p.name === providerName);
+  return provider ? provider.phoneNumber : null;
+}
+
 function processProviderData(data) {
   if (!data || !data.kurzy) {
     console.warn("Invalid provider data received");
@@ -50,93 +103,16 @@ function processProviderData(data) {
       return null;
     }
     const isBank = bankNames.includes(data.banka);
-    const type = isBank ? "bank" : "exchange";
-    if (data.banka === "Česká národní banka") {
-      const rates = Object.entries(data.kurzy)
-        .map(([currency, rateData]) => {
-          const currencyCode = CurrencyCode.create(currency);
-          if (!currencyCode) return null;
-
-          const middleRate = rateData.dev_stred;
-          if (middleRate === null || middleRate === undefined) return null;
-
-          // For CNB, use the same rate for both buy and sell
-          return new CurrencyRate(
-            currencyCode,
-            parseFloat(middleRate),
-            parseFloat(middleRate)
-          );
-        })
-        .filter((rate) => rate !== null);
-
-      if (rates.length === 0) {
-        console.warn("No valid rates found for CNB");
-        return null;
-      }
-
-      let phoneNumber = null;
-      for (let provider of phoneNumberData) {
-        if (provider.name === data.banka) {
-          phoneNumber = provider.phoneNumber;
-        }
-      }
-
-      return new RateProvider(
-        data.banka,
-        new CurrencyCode("CZK"),
-        rates,
-        data.denc,
-        phoneNumber,
-        type
-      );
-    }
-
-    // Regular handling for other providers
-    const rates = Object.entries(data.kurzy)
-      .map(([currency, rateData]) => {
-        const currencyCode = CurrencyCode.create(currency);
-        if (!currencyCode) return null;
-
-        const buyRate =
-          rateData.dev_nakup !== null && rateData.dev_nakup !== undefined
-            ? parseFloat(rateData.dev_nakup)
-            : rateData.val_nakup !== null && rateData.val_nakup !== undefined
-            ? parseFloat(rateData.val_nakup)
-            : null;
-
-        const sellRate =
-          rateData.dev_prodej !== null && rateData.dev_prodej !== undefined
-            ? parseFloat(rateData.dev_prodej)
-            : rateData.val_prodej !== null && rateData.val_prodej !== undefined
-            ? parseFloat(rateData.val_prodej)
-            : null;
-
-        if (buyRate === null || sellRate === null) return null;
-
-        return new CurrencyRate(currencyCode, buyRate, sellRate);
-      })
-      .filter((rate) => rate !== null);
+    const isCNB = data.banka === "Česká národní banka";
+    const rates = createRates(data.kurzy, isCNB);
 
     if (rates.length === 0) {
       console.warn(`No valid rates found for provider: ${data.banka}`);
       return null;
     }
 
-    let phoneNumber = null;
-    for (let provider of phoneNumberData) {
-      if (provider.name === data.banka) {
-        phoneNumber = provider.phoneNumber;
-      }
-    }
-
-    return new RateProvider(
-      data.banka,
-      new CurrencyCode("CZK"),
-      rates,
-      data.denc,
-      phoneNumber,
-      type
-    );
+    const phoneNumber = getPhoneNumber(data.banka, phoneNumberData);
+    return createProvider(data.banka, rates, data.denc, phoneNumber, isBank);
   } catch (error) {
     console.error(`Error processing provider ${data.banka}:`, error);
     return null;
