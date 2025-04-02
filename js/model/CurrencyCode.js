@@ -160,8 +160,24 @@ export class CurrencyCode {
     "GGP",
 
     // Obsolete or historical currencies
+    "BEF",
+    "FIM",
+    "FRF",
+    "IEP",
+    "ITL",
+    "LUF",
     "XDR",
+    "DEM",
+    "NLG",
+    "PTE",
+    "ATS",
+    "GRD",
+    "SKK",
+    "ESP",
     "BAM",
+    "CYP",
+    "MTL",
+    "SIT",
   ]);
 
   constructor(code) {

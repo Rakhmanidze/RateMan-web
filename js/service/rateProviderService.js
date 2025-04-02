@@ -107,7 +107,6 @@ function processProviderData(data) {
     const rates = createRates(data.kurzy, isCNB);
 
     if (rates.length === 0) {
-      console.warn(`No valid rates found for provider: ${data.banka}`);
       return null;
     }
 

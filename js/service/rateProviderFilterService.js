@@ -14,7 +14,6 @@ export class RateProviderFilterService {
   }) {
     try {
       if (!this.originalProviders || this.originalProviders.length === 0) {
-        console.warn("No providers data available");
         return [];
       }
 
