@@ -1,7 +1,7 @@
 export class FilterState {
   constructor() {
     this.searchProviderName = localStorage.getItem("searchProviderName") || "";
-    this.currencyPair = localStorage.getItem("currencyPair") || "";
+    this.currency = localStorage.getItem("currency") || "";
     this.providerType = localStorage.getItem("providerType") || "all";
     this.sortBy = localStorage.getItem("sortBy") || "noRateSorting";
   }
@@ -15,13 +15,13 @@ export class FilterState {
     return this.searchProviderName;
   }
 
-  setCurrencyPair(pair) {
-    this.currencyPair = pair;
-    localStorage.setItem("currencyPair", pair);
+  setCurrency(pair) {
+    this.currency = pair;
+    localStorage.setItem("currency", pair);
   }
 
-  getCurrencyPair() {
-    return this.currencyPair;
+  getCurrency() {
+    return this.currency;
   }
 
   setProviderType(type) {
@@ -44,7 +44,7 @@ export class FilterState {
 
   clearAllFilters() {
     this.setSearchedProviderName("");
-    this.setCurrencyPair("");
+    this.setCurrency("");
     this.setProviderType("all");
     this.setSortBy("noRateSorting");
   }

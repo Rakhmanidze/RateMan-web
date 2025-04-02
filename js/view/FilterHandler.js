@@ -1,11 +1,23 @@
+import { CurrencySelector } from "./CurrencySelector.js";
+
 export class FilterHandler {
   constructor(providerFilterService, providerDisplay, filterState) {
     this.providerSearchInput = document.getElementById("provider-search");
-    this.currencyPairInput = document.getElementById("select-pair");
+    this.currencyInput = document.getElementById("select-currency");
     this.providerFilterDropdown = document.getElementById("provider-filter");
     this.providerFilterService = providerFilterService;
     this.providerDisplay = providerDisplay;
     this.filterState = filterState;
+
+    this.currencySelector = new CurrencySelector(
+      document.getElementById("select-currency"),
+      document.getElementById("currency-dropdown"),
+      (selectedCode) => {
+        this.filterState.setCurrency(selectedCode);
+        this.applyAllFilters();
+      }
+    );
+
     this.noResultsMessage = document.createElement("div");
     this.noResultsMessage.className = "no-results";
 
@@ -16,7 +28,7 @@ export class FilterHandler {
   initializeFromState() {
     this.providerSearchInput.value = this.filterState.getSearchedProviderName();
     this.providerFilterDropdown.value = this.filterState.getProviderType();
-    this.currencyPairInput.value = this.filterState.getCurrencyPair();
+    this.currencyInput.value = this.filterState.getCurrency();
     this.applyAllFilters();
   }
 
@@ -26,8 +38,8 @@ export class FilterHandler {
       this.applyAllFilters();
     });
 
-    this.currencyPairInput.addEventListener("input", (event) => {
-      this.filterState.setCurrencyPair(event.target.value);
+    this.currencyInput.addEventListener("input", (event) => {
+      this.filterState.setCurrency(event.target.value);
       this.applyAllFilters();
     });
 
@@ -41,7 +53,7 @@ export class FilterHandler {
     const filters = {
       providerType: this.filterState.getProviderType(),
       searchTerm: this.filterState.getSearchedProviderName(),
-      currencyPair: this.filterState.getCurrencyPair(),
+      currency: this.filterState.getCurrency(),
     };
 
     const filteredProviders =

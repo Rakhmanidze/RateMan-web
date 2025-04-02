@@ -100,12 +100,12 @@ main {
   font-weight: 500;
 }
 
-.currency-pair-combobox {
+.currency-combobox {
   position: relative;
   width: 121px;
 }
 
-.currency-pair-combobox input {
+.currency-combobox input {
   width: 100%;
   padding: 8px 12px;
   border: 1px solid var(--container-border);
@@ -115,12 +115,12 @@ main {
   transition: border-color 0.3s ease;
 }
 
-.currency-pair-combobox input:focus {
+.currency-combobox input:focus {
   outline: none;
   border-color: var(--input-focus-border);
 }
 
-.currency-pair-options {
+.currency-options {
   position: absolute;
   top: 100%;
   left: 0;
@@ -135,17 +135,17 @@ main {
   box-shadow: var(--provider-shadow);
 }
 
-.currency-pair-options.show {
+.currency-options.show {
   display: block;
 }
 
-.currency-pair-options div {
+.currency-options div {
   padding: 8px 12px;
   cursor: pointer;
   font-size: 1rem;
 }
 
-.currency-pair-options div:hover {
+.currency-options div:hover {
   background-color: var(--hover-btn-gray);
 }
 
