@@ -18,58 +18,68 @@ export class RateProviderDisplay {
     return thead;
   }
 
-  displayProvider(provider) {
-    if (!this.container) {
-      console.error("Container not found");
-      return;
+  createTableRow(rate, isCNB) {
+    const row = document.createElement("tr");
+
+    const currencyCell = document.createElement("td");
+    currencyCell.textContent = rate.getForeignCurrency().getCode();
+    row.appendChild(currencyCell);
+
+    if (isCNB) {
+      const middleRateCell = document.createElement("td");
+      middleRateCell.textContent = rate.getBuyRate().toFixed(4);
+      row.appendChild(middleRateCell);
+    } else {
+      const buyRateCell = document.createElement("td");
+      buyRateCell.textContent = rate.getBuyRate().toFixed(4);
+      row.appendChild(buyRateCell);
+
+      const sellRateCell = document.createElement("td");
+      sellRateCell.textContent = rate.getSellRate().toFixed(4);
+      row.appendChild(sellRateCell);
     }
+    return row;
+  }
 
-    const providerSection = document.createElement("div");
-    providerSection.className = "provider-section";
+  createProviderSection(provider) {
+    const section = document.createElement("div");
+    section.className = "provider-section";
 
-    const providerPhoneNumber = provider.getPhoneNumber();
-    const phoneNumberPart = providerPhoneNumber
-      ? ` - ${providerPhoneNumber}`
-      : "";
+    const phoneNumber = provider.getPhoneNumber();
+    const phoneNumberPart = phoneNumber ? ` - ${phoneNumber}` : "";
 
     const header = document.createElement("h2");
     header.textContent = `${provider.getName()} - ${provider
       .getBaseCurrency()
       .getCode()} - ${provider.getRatesDate()}${phoneNumberPart}`;
 
-    providerSection.appendChild(header);
+    section.appendChild(header);
+    return section;
+  }
 
+  createTable(provider, isCNB) {
     const table = document.createElement("table");
-    table.appendChild(
-      this.createTableHeaders(provider.getName() === "Česká národní banka")
-    );
+    table.appendChild(this.createTableHeaders(isCNB));
 
     const tbody = document.createElement("tbody");
     provider.getAllRates().forEach((rate) => {
-      const row = document.createElement("tr");
-      const currencyCell = document.createElement("td");
-      currencyCell.textContent = rate.getForeignCurrency().getCode();
-      row.appendChild(currencyCell);
-
-      if (provider.getName() === "Česká národní banka") {
-        const middleRateCell = document.createElement("td");
-        middleRateCell.textContent = rate.getBuyRate().toFixed(4);
-        row.appendChild(middleRateCell);
-      } else {
-        const buyRateCell = document.createElement("td");
-        buyRateCell.textContent = rate.getBuyRate().toFixed(4);
-        row.appendChild(buyRateCell);
-
-        const sellRateCell = document.createElement("td");
-        sellRateCell.textContent = rate.getSellRate().toFixed(4);
-        row.appendChild(sellRateCell);
-      }
-
-      tbody.appendChild(row);
+      tbody.appendChild(this.createTableRow(rate, isCNB));
     });
-
     table.appendChild(tbody);
-    providerSection.appendChild(table);
+
+    return table;
+  }
+
+  displayProvider(provider) {
+    if (!this.container) {
+      console.error("Container not found");
+      return;
+    }
+
+    const isCNB = provider.getName() === "Česká národní banka";
+    const providerSection = this.createProviderSection(provider);
+    providerSection.appendChild(this.createTable(provider, isCNB));
+
     this.container.appendChild(providerSection);
   }
 
