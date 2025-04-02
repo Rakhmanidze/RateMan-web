@@ -103,7 +103,7 @@ main {
   border: 1px solid var(--container-border);
   width: 100%;
   box-sizing: border-box;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.2s ease;
 }
 
 .provider-section:hover {
@@ -155,25 +155,25 @@ footer a:hover {
 
 @media (max-width: 1200px) {
   body {
-    font-size: 15px;
+    font-size: 0.9375rem;
   }
 }
 
 @media (max-width: 992px) {
   body {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 }
 
 @media (max-width: 768px) {
   body {
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
 }
 
 @media (max-width: 480px) {
   body {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 }
 

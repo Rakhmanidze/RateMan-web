@@ -62,18 +62,4 @@ export class FilterHandler {
       );
     }
   }
-
-  updateDisplay(providers) {
-    this.providerDisplay.clearProviders();
-
-    if (!providers || providers.length === 0) {
-      this.noResultsMessage.textContent = "No results found";
-      this.providerDisplay.container.appendChild(this.noResultsMessage);
-    } else {
-      this.noResultsMessage.remove();
-      providers.forEach((provider) =>
-        this.providerDisplay.displayProvider(provider)
-      );
-    }
-  }
 }

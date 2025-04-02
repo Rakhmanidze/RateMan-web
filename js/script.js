@@ -13,14 +13,6 @@ const filterHandler = new FilterHandler(
   filterState
 );
 
-function displayProvidersData(providers) {
-  if (providers.length > 0) {
-    for (let provider of providers) {
-      providerDisplay.displayProvider(provider);
-    }
-  }
-}
-
 fetchAndProcessAllProviderRates()
   .then((providers) => {
     providerFilterService.setProviders(providers);

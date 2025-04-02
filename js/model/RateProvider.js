@@ -1,6 +1,8 @@
 import { CurrencyCode } from "./CurrencyCode.js";
 import { CurrencyRate } from "./CurrencyRate.js";
 
+const VALID_TYPES = ["bank", "exchange", "crypto-exchange"];
+
 export class RateProvider {
   constructor(name, baseCurrency, rates, ratesDate, phoneNumber, type) {
     if (typeof name !== "string") {
@@ -18,8 +20,8 @@ export class RateProvider {
     if (typeof ratesDate !== "string") {
       throw new Error("ratesDate must be a string");
     }
-    if (type !== "bank" && type !== "exchange") {
-      throw new Error("Type must be either 'bank' or 'exchange'");
+    if (!VALID_TYPES.includes(type)) {
+      throw new Error("Invalid provider type");
     }
     this.name = name;
     this.baseCurrency = baseCurrency;
