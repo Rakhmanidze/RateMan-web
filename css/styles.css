@@ -35,12 +35,12 @@ main {
 .header-image {
   width: 100%;
   max-width: 240px;
+  height: auto;
   margin: 20px 160px 20px -400px;
 }
 
-h1 {
+h2 {
   margin: 0;
-  font-size: 1.8rem;
   color: var(--text-header);
 }
 
@@ -238,6 +238,14 @@ footer a:hover {
   text-decoration: underline;
 }
 
+@media (max-width: 1500px) {
+  .header-image {
+    margin-left: -10px; /* Reduces negative margin to keep logo visible */
+    margin-right: 40px; /* Adjusts spacing between logo and h2 */
+    max-width: 220px; /* Slightly smaller to fit better */
+  }
+}
+
 @media (max-width: 1200px) {
   body {
     font-size: 0.9375rem;
@@ -254,11 +262,26 @@ footer a:hover {
   body {
     font-size: 0.8125rem;
   }
+  .header-image {
+    margin-left: 0; /* Removes negative margin on smaller screens */
+    margin-right: 20px; /* Keeps some space between logo and h1 */
+    max-width: 180px; /* Slightly smaller logo for better fit */
+  }
 }
 
 @media (max-width: 480px) {
   body {
     font-size: 0.75rem;
+  }
+  .header-container {
+    flex-direction: column; /* Stacks logo and h1 vertically on very small screens */
+    align-items: flex-start; /* Aligns to the left */
+    margin-top: -20px; /* Adjusts top margin for smaller screens */
+    margin-bottom: 0; /* Keeps space tight below */
+  }
+  .header-image {
+    margin: 10px 0; /* Simplified margins: top/bottom only */
+    max-width: 150px; /* Even smaller logo for tiny screens */
   }
 }
 
