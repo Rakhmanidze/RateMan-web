@@ -10,15 +10,24 @@ export class CurrencySelector {
       ...Array.from(CurrencyCode.VALID_CODES),
     ];
     this.selectedCurrency = null;
+    this.lastSelected = null;
     this.setupEventListeners();
   }
 
   setupEventListeners() {
     this.inputElement.addEventListener("input", () => this.handleInput());
     this.inputElement.addEventListener("focus", () => this.showDropdown());
-    this.dropdownElement.addEventListener("click", (event) =>
-      this.handleSelection(event)
-    );
+    this.dropdownElement.addEventListener("mousedown", (e) => {
+      this.lastSelected = e.target;
+    });
+
+    this.dropdownElement.addEventListener("mouseup", (e) => {
+      if (this.lastSelected === e.target) {
+        this.handleSelection(e);
+      }
+      this.lastSelected = null;
+    });
+
     document.addEventListener("click", (event) =>
       this.handleClickOutside(event)
     );
@@ -43,6 +52,8 @@ export class CurrencySelector {
   }
 
   handleSelection(event) {
+    if (event.button === 2) return;
+
     if (event.target.tagName === "DIV") {
       const selectedCode = event.target.textContent;
 
