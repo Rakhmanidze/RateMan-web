@@ -274,6 +274,12 @@ footer a:hover {
 }
 
 @media (max-width: 530px) {
+  .search-and-filter input {
+    width: 200px;
+    height: 34px;
+    padding: 6px 10px;
+    font-size: 0.875rem;
+  }
   .sort-btn {
     width: 83px;
     height: 30px;
