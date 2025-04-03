@@ -9,6 +9,7 @@ export class CurrencySelector {
       "All currencies",
       ...Array.from(CurrencyCode.VALID_CODES),
     ];
+    this.selectedCurrency = null;
     this.setupEventListeners();
   }
 
@@ -44,6 +45,18 @@ export class CurrencySelector {
   handleSelection(event) {
     if (event.target.tagName === "DIV") {
       const selectedCode = event.target.textContent;
+
+      const currentValue = this.inputElement.value.trim();
+      if (
+        (selectedCode === "All currencies" && currentValue === "") ||
+        selectedCode === currentValue
+      ) {
+        this.dropdownElement.classList.remove("show");
+        return;
+      }
+      this.selectedCurrency =
+        selectedCode === "All currencies" ? null : selectedCode;
+
       this.inputElement.value =
         selectedCode === "All currencies" ? "" : selectedCode;
       this.dropdownElement.classList.remove("show");
