@@ -28,7 +28,10 @@ export class FilterHandler {
   initializeFromState() {
     this.providerSearchInput.value = this.filterState.getSearchedProviderName();
     this.providerFilterDropdown.value = this.filterState.getProviderType();
-    this.currencyInput.value = this.filterState.getCurrency();
+    this.currencyInput.value =
+      this.filterState.getCurrency() === "All currencies"
+        ? ""
+        : this.filterState.getCurrency() || "";
     this.applyAllFilters();
   }
 
@@ -39,7 +42,8 @@ export class FilterHandler {
     });
 
     this.currencyInput.addEventListener("input", (event) => {
-      this.filterState.setCurrency(event.target.value);
+      const value = event.target.value || "All currencies";
+      this.filterState.setCurrency(value);
       this.applyAllFilters();
     });
 

@@ -5,7 +5,10 @@ export class CurrencySelector {
     this.inputElement = inputElement;
     this.dropdownElement = dropdownElement;
     this.onSelectCallback = onSelectCallback;
-    this.allCurrencyCodes = Array.from(CurrencyCode.VALID_CODES);
+    this.allCurrencyCodes = [
+      "All currencies",
+      ...Array.from(CurrencyCode.VALID_CODES),
+    ];
     this.setupEventListeners();
   }
 
@@ -41,7 +44,8 @@ export class CurrencySelector {
   handleSelection(event) {
     if (event.target.tagName === "DIV") {
       const selectedCode = event.target.textContent;
-      this.inputElement.value = selectedCode;
+      this.inputElement.value =
+        selectedCode === "All currencies" ? "" : selectedCode;
       this.dropdownElement.classList.remove("show");
       if (this.onSelectCallback) {
         this.onSelectCallback(selectedCode);
