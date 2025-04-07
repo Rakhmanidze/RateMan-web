@@ -32,11 +32,27 @@ main {
   align-items: center;
 }
 
-.header-image {
+/* .header-image {
   width: 100%;
   max-width: 240px;
   height: auto;
   margin: 20px 160px 20px -400px;
+} */
+
+#logo-link {
+  width: 100%;
+  max-width: 240px; /* Matches original */
+  height: auto;
+  margin: 20px 160px 20px -400px; /* Matches original */
+  display: block; /* Ensures margins work as expected */
+  text-decoration: none; /* No underline */
+  cursor: pointer; /* Clickable */
+}
+
+.header-image {
+  width: 100%; /* Fills the <a> */
+  height: auto; /* Maintains aspect ratio */
+  display: block; /* Removes inline spacing */
 }
 
 h2 {
@@ -239,7 +255,7 @@ footer a:hover {
 }
 
 @media (max-width: 1500px) {
-  .header-image {
+  #logo-link {
     margin-left: -10px;
     margin-right: 40px;
     max-width: 220px;
@@ -250,7 +266,7 @@ footer a:hover {
   body {
     font-size: 0.9375rem;
   }
-  .header-image {
+  #logo-link {
     margin-right: 30px;
     max-width: 190px;
   }
@@ -266,7 +282,7 @@ footer a:hover {
   body {
     font-size: 0.8125rem;
   }
-  .header-image {
+  #logo-link {
     margin-left: 0;
     margin-right: 20px;
     max-width: 180px;
@@ -314,7 +330,7 @@ footer a:hover {
     margin-top: -20px;
     margin-bottom: 0;
   }
-  .header-image {
+  #logo-link {
     margin: 10px 0;
     max-width: 150px;
   }

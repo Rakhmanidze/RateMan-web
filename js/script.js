@@ -23,3 +23,12 @@ fetchAndProcessAllProviderRates()
   });
 
 filterHandler.setupEventListeners();
+
+const logoLink = document.getElementById("logo-link");
+logoLink.addEventListener("click", (event) => {
+  event.preventDefault();
+  filterState.setCurrency("All currencies");
+  filterState.setSearchedProviderName("");
+  filterState.setProviderType("all");
+  filterHandler.applyAllFilters();
+});
