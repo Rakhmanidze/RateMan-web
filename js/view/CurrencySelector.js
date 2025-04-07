@@ -79,6 +79,9 @@ export class CurrencySelector {
           this.onSelectCallback(selectedCode);
         }
       } else {
+        if (selectedCode === "All currencies") {
+          this.inputElement.value = "";
+        }
         this.dropdownElement.classList.remove("show");
       }
     }
