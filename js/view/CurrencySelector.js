@@ -57,10 +57,9 @@ export class CurrencySelector {
     if (event.target.tagName === "DIV") {
       const selectedCode = event.target.textContent;
 
-      const currentValue = this.inputElement.value.trim();
       if (
-        (selectedCode === "All currencies" && currentValue === "") ||
-        selectedCode === currentValue
+        selectedCode === "All currencies" &&
+        this.inputElement.value.trim() === ""
       ) {
         this.dropdownElement.classList.remove("show");
         return;
