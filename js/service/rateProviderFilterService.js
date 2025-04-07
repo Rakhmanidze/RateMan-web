@@ -1,3 +1,5 @@
+import { RateProvider } from "../model/RateProvider.js";
+
 export class RateProviderFilterService {
   constructor() {
     this.originalProviders = [];
@@ -7,11 +9,7 @@ export class RateProviderFilterService {
     this.originalProviders = providers;
   }
 
-  filterProviders({
-    providerType = "all",
-    searchTerm = "",
-    currencyPair = "",
-  }) {
+  filterProviders({ providerType = "all", searchTerm = "", currency = "" }) {
     try {
       if (!this.originalProviders || this.originalProviders.length === 0) {
         return [];
@@ -39,8 +37,21 @@ export class RateProviderFilterService {
         );
       }
 
-      if (currencyPair) {
-        // TODO: Implement currency pair filtering logic here
+      if (currency) {
+        filteredProviders = filteredProviders.map((provider) => {
+          const filteredRates = provider
+            .getAllRates()
+            .filter((rate) => rate.getForeignCurrency().getCode() === currency);
+
+          return new RateProvider(
+            provider.getName(),
+            provider.getBaseCurrency(),
+            filteredRates,
+            provider.getRatesDate(),
+            provider.getPhoneNumber(),
+            provider.getType()
+          );
+        });
       }
 
       return filteredProviders;

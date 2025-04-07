@@ -72,6 +72,7 @@ export class CurrencySelector {
         selectedCode === "All currencies" ? "" : selectedCode;
       this.dropdownElement.classList.remove("show");
       if (this.onSelectCallback) {
+        console.log(selectedCode);
         this.onSelectCallback(selectedCode);
       }
     }
