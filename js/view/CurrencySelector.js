@@ -64,15 +64,19 @@ export class CurrencySelector {
         this.dropdownElement.classList.remove("show");
         return;
       }
-      this.selectedCurrency =
+      const newSelectedCurrency =
         selectedCode === "All currencies" ? null : selectedCode;
 
-      this.inputElement.value =
-        selectedCode === "All currencies" ? "" : selectedCode;
-      this.dropdownElement.classList.remove("show");
-      if (this.onSelectCallback) {
-        console.log("Selected:", selectedCode);
-        this.onSelectCallback(selectedCode);
+      if (newSelectedCurrency !== this.selectedCurrency) {
+        this.selectedCurrency = newSelectedCurrency;
+        this.inputElement.value =
+          selectedCode === "All currencies" ? "" : selectedCode;
+        this.dropdownElement.classList.remove("show");
+        if (this.onSelectCallback) {
+          this.onSelectCallback(selectedCode);
+        }
+      } else {
+        this.dropdownElement.classList.remove("show");
       }
     }
   }
