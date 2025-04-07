@@ -12,6 +12,9 @@ export class CurrencySelector {
     this.selectedCurrency = null;
     this.lastSelected = null;
     this.setupEventListeners();
+    const initialValue = this.inputElement.value.trim();
+    this.selectedCurrency =
+      initialValue && initialValue !== "All currencies" ? initialValue : null;
   }
 
   setupEventListeners() {
@@ -36,7 +39,7 @@ export class CurrencySelector {
   handleInput() {
     const userInput = this.inputElement.value.toUpperCase().trim();
     const filteredCodes = this.allCurrencyCodes.filter((code) =>
-      code.includes(userInput)
+      code.toUpperCase().includes(userInput)
     );
     this.populateDropdown(filteredCodes);
   }
