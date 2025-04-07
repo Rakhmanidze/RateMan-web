@@ -64,7 +64,7 @@ export class CurrencySelector {
         selectedCode === "All currencies" &&
         this.inputElement.value.trim() === ""
       ) {
-        this.dropdownElement.classList.remove("show");
+        this.hideDropdown();
         return;
       }
       const newSelectedCurrency =
@@ -74,7 +74,7 @@ export class CurrencySelector {
         this.selectedCurrency = newSelectedCurrency;
         this.inputElement.value =
           selectedCode === "All currencies" ? "" : selectedCode;
-        this.dropdownElement.classList.remove("show");
+        this.hideDropdown();
         if (this.onSelectCallback) {
           this.onSelectCallback(selectedCode);
         }
@@ -82,7 +82,7 @@ export class CurrencySelector {
         if (selectedCode === "All currencies") {
           this.inputElement.value = "";
         }
-        this.dropdownElement.classList.remove("show");
+        this.hideDropdown();
       }
     }
   }
@@ -92,11 +92,15 @@ export class CurrencySelector {
       !this.inputElement.contains(event.target) &&
       !this.dropdownElement.contains(event.target)
     ) {
-      this.dropdownElement.classList.remove("show");
+      this.hideDropdown();
     }
   }
 
   showDropdown() {
     this.populateDropdown(this.allCurrencyCodes);
+  }
+
+  hideDropdown() {
+    this.dropdownElement.classList.remove("show");
   }
 }
