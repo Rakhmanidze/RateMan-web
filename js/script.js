@@ -14,7 +14,7 @@ const filterHandler = new FilterHandler(
   filterState
 );
 
-const logoHandler = new LogoHandler(filterState, filterHandler);
+const logoHandler = new LogoHandler(filterHandler);
 
 fetchAndProcessAllProviderRates()
   .then((providers) => {
@@ -24,5 +24,3 @@ fetchAndProcessAllProviderRates()
   .catch((error) => {
     console.error("Error in main process:", error);
   });
-
-filterHandler.setupEventListeners();

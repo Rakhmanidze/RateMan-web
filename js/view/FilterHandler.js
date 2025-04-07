@@ -72,4 +72,14 @@ export class FilterHandler {
       );
     }
   }
+
+  reset() {
+    this.filterState.setCurrency("All currencies");
+    this.filterState.setSearchedProviderName("");
+    this.filterState.setProviderType("all");
+    this.providerSearchInput.value = "";
+    this.providerFilterDropdown.value = "all";
+    this.currencyInput.value = "";
+    this.applyAllFilters();
+  }
 }

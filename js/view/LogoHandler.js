@@ -1,6 +1,5 @@
 export class LogoHandler {
-  constructor(filterState, filterHandler) {
-    this.filterState = filterState;
+  constructor(filterHandler) {
     this.filterHandler = filterHandler;
     this.setupLogoLink();
   }
@@ -9,10 +8,7 @@ export class LogoHandler {
     const logoLink = document.getElementById("logo-link");
     logoLink.addEventListener("click", (event) => {
       event.preventDefault();
-      this.filterState.setCurrency("All currencies");
-      this.filterState.setSearchedProviderName("");
-      this.filterState.setProviderType("all");
-      this.filterHandler.applyAllFilters();
+      this.filterHandler.reset();
     });
   }
 }
