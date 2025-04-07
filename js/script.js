@@ -3,6 +3,7 @@ import { RateProviderDisplay } from "./view/RateProviderDisplay.js";
 import { RateProviderFilterService } from "./service/RateProviderFilterService.js";
 import { fetchAndProcessAllProviderRates } from "./service/RateProviderService.js";
 import { FilterState } from "./model/FilterState.js";
+import { LogoHandler } from "./view/LogoHandler.js";
 
 const providerDisplay = new RateProviderDisplay("provider-display");
 const providerFilterService = new RateProviderFilterService();
@@ -12,6 +13,8 @@ const filterHandler = new FilterHandler(
   providerDisplay,
   filterState
 );
+
+const logoHandler = new LogoHandler(filterState, filterHandler);
 
 fetchAndProcessAllProviderRates()
   .then((providers) => {
@@ -23,12 +26,3 @@ fetchAndProcessAllProviderRates()
   });
 
 filterHandler.setupEventListeners();
-
-const logoLink = document.getElementById("logo-link");
-logoLink.addEventListener("click", (event) => {
-  event.preventDefault();
-  filterState.setCurrency("All currencies");
-  filterState.setSearchedProviderName("");
-  filterState.setProviderType("all");
-  filterHandler.applyAllFilters();
-});
