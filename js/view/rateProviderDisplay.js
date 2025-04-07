@@ -75,6 +75,9 @@ export class RateProviderDisplay {
       console.error("Container not found");
       return;
     }
+    if (!provider.getAllRates().length) {
+      return;
+    }
 
     const isCNB = provider.getName() === "Česká národní banka";
     const providerSection = this.createProviderSection(provider);

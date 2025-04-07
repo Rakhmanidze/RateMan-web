@@ -1,4 +1,6 @@
 import { RateProvider } from "../model/RateProvider.js";
+import { CurrencyRate } from "../model/CurrencyRate.js";
+import { CurrencyCode } from "../model/CurrencyCode.js";
 
 export class RateProviderFilterService {
   constructor() {
@@ -39,14 +41,18 @@ export class RateProviderFilterService {
 
       if (currency && currency !== "All currencies") {
         filteredProviders = filteredProviders.map((provider) => {
-          const filteredRates = provider
+          const existingRate = provider
             .getAllRates()
-            .filter((rate) => rate.getForeignCurrency().getCode() === currency);
+            .find((rate) => rate.getForeignCurrency().getCode() === currency);
+
+          const rates = existingRate
+            ? [existingRate]
+            : [new CurrencyRate(new CurrencyCode(currency), null, null)];
 
           return new RateProvider(
             provider.getName(),
             provider.getBaseCurrency(),
-            filteredRates,
+            rates,
             provider.getRatesDate(),
             provider.getPhoneNumber(),
             provider.getType()
