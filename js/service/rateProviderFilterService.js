@@ -40,24 +40,22 @@ export class RateProviderFilterService {
       }
 
       if (currency && currency !== "All currencies") {
-        filteredProviders = filteredProviders.map((provider) => {
-          const existingRate = provider
-            .getAllRates()
-            .find((rate) => rate.getForeignCurrency().getCode() === currency);
-
-          const rates = existingRate
-            ? [existingRate]
-            : [new CurrencyRate(new CurrencyCode(currency), null, null)];
-
-          return new RateProvider(
-            provider.getName(),
-            provider.getBaseCurrency(),
-            rates,
-            provider.getRatesDate(),
-            provider.getPhoneNumber(),
-            provider.getType()
-          );
-        });
+        filteredProviders = filteredProviders
+          .map((provider) => {
+            const existingRate = provider
+              .getAllRates()
+              .find((rate) => rate.getForeignCurrency().getCode() === currency);
+            if (!existingRate) return null;
+            return new RateProvider(
+              provider.getName(),
+              provider.getBaseCurrency(),
+              [existingRate],
+              provider.getRatesDate(),
+              provider.getPhoneNumber(),
+              provider.getType()
+            );
+          })
+          .filter((provider) => provider !== null);
       }
 
       return filteredProviders;
@@ -67,3 +65,8 @@ export class RateProviderFilterService {
     }
   }
 }
+
+//TODO
+//when choosing currency which doesnt have rates page goes a bit right
+//when choosing currency scroll thing if i use it then input goes wild and i have all currencies in it
+//when inputing currency its reacting immediately when i input something but should do nothing until i choose currency from list in dropdown menu
