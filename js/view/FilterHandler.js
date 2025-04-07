@@ -41,12 +41,6 @@ export class FilterHandler {
       this.applyAllFilters();
     });
 
-    this.currencyInput.addEventListener("input", (event) => {
-      const value = event.target.value || "All currencies";
-      this.filterState.setCurrency(value);
-      this.applyAllFilters();
-    });
-
     this.providerFilterDropdown.addEventListener("change", (event) => {
       this.filterState.setProviderType(event.target.value);
       this.applyAllFilters();
