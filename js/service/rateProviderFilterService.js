@@ -67,4 +67,3 @@ export class RateProviderFilterService {
 //TODO
 //when choosing currency which doesnt have rates page goes a bit right
 //when choosing currency scroll thing if i use it then input goes wild and i have all currencies in it
-//logo in web should be link to my website

@@ -32,27 +32,20 @@ main {
   align-items: center;
 }
 
-/* .header-image {
+#logo-link {
   width: 100%;
   max-width: 240px;
   height: auto;
   margin: 20px 160px 20px -400px;
-} */
-
-#logo-link {
-  width: 100%;
-  max-width: 240px; /* Matches original */
-  height: auto;
-  margin: 20px 160px 20px -400px; /* Matches original */
-  display: block; /* Ensures margins work as expected */
-  text-decoration: none; /* No underline */
-  cursor: pointer; /* Clickable */
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .header-image {
-  width: 100%; /* Fills the <a> */
-  height: auto; /* Maintains aspect ratio */
-  display: block; /* Removes inline spacing */
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 h2 {

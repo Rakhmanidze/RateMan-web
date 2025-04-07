@@ -14,7 +14,7 @@ const filterHandler = new FilterHandler(
   filterState
 );
 
-const logoHandler = new LogoHandler(filterHandler);
+new LogoHandler(filterHandler);
 
 fetchAndProcessAllProviderRates()
   .then((providers) => {
