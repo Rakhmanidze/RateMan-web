@@ -21,11 +21,18 @@ export class CurrencySelector {
     this.inputElement.addEventListener("input", () => this.handleInput());
     this.inputElement.addEventListener("focus", () => this.showDropdown());
     this.dropdownElement.addEventListener("mousedown", (e) => {
-      this.lastSelected = e.target;
+      if (e.target === this.dropdownElement) {
+        e.preventDefault();
+        return;
+      }
+
+      if (e.target.tagName === "DIV") {
+        this.lastSelected = e.target;
+      }
     });
 
     this.dropdownElement.addEventListener("mouseup", (e) => {
-      if (this.lastSelected === e.target) {
+      if (this.lastSelected && this.lastSelected === e.target) {
         this.handleSelection(e);
       }
       this.lastSelected = null;
