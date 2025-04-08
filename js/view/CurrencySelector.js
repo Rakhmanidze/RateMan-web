@@ -58,34 +58,26 @@ export class CurrencySelector {
   handleSelection(event) {
     if (event.button === 2) return;
 
-    if (event.target.tagName === "DIV") {
-      const selectedCode = event.target.textContent;
+    const selectedCode = event.target.textContent;
+    const wasEmpty = this.inputElement.value.trim() === "";
 
-      if (
-        selectedCode === "All currencies" &&
-        this.inputElement.value.trim() === ""
-      ) {
-        this.hideDropdown();
-        return;
-      }
-      const newSelectedCurrency =
-        selectedCode === "All currencies" ? null : selectedCode;
-
-      if (newSelectedCurrency !== this.selectedCurrency) {
-        this.selectedCurrency = newSelectedCurrency;
-        this.inputElement.value =
-          selectedCode === "All currencies" ? "" : selectedCode;
-        this.hideDropdown();
-        if (this.onSelectCallback) {
-          this.onSelectCallback(selectedCode);
-        }
-      } else {
-        if (selectedCode === "All currencies") {
-          this.inputElement.value = "";
-        }
-        this.hideDropdown();
-      }
+    if (selectedCode === "All currencies" && wasEmpty) {
+      this.hideDropdown();
+      return;
     }
+    const newSelection =
+      selectedCode === "All currencies" ? null : selectedCode;
+    const selectionChanged = newSelection !== this.selectedCurrency;
+
+    if (selectionChanged) {
+      this.selectedCurrency = newSelection;
+      this.inputElement.value =
+        selectedCode === "All currencies" ? "" : selectedCode;
+      this.onSelectCallback?.(selectedCode);
+    } else if (selectedCode === "All currencies") {
+      this.inputElement.value = "";
+    }
+    this.hideDropdown();
   }
 
   handleClickOutside(event) {
