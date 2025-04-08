@@ -1,22 +1,28 @@
 import { CurrencyCode } from "../model/CurrencyCode.js";
 
 export class CurrencySelector {
+  static ALL_OPTION = "All currencies";
+
   constructor(inputElement, dropdownElement, onSelectCallback) {
     this.inputElement = inputElement;
     this.dropdownElement = dropdownElement;
     this.onSelectCallback = onSelectCallback;
     this.allCurrencyCodes = [
-      "All currencies",
+      CurrencySelector.ALL_OPTION,
       ...Array.from(CurrencyCode.VALID_CODES),
     ];
     this.selectedCurrency = null;
     this.setupEventListeners();
     const initialValue = this.inputElement.value.trim();
     this.selectedCurrency =
-      initialValue && initialValue !== "All currencies" ? initialValue : null;
+      initialValue && initialValue !== CurrencySelector.ALL_OPTION
+        ? initialValue
+        : null;
   }
 
   setupEventListeners() {
+    let initialSelection = null;
+
     this.inputElement.addEventListener("input", () => this.handleInput());
     this.inputElement.addEventListener("focus", () => this.showDropdown());
     this.dropdownElement.addEventListener("mousedown", (e) => {
@@ -24,12 +30,16 @@ export class CurrencySelector {
         e.preventDefault();
         return;
       }
+      if (e.target.tagName === "DIV") {
+        initialSelection = e.target;
+      }
     });
 
     this.dropdownElement.addEventListener("click", (e) => {
-      if (e.target.tagName === "DIV") {
+      if (initialSelection && e.target === initialSelection) {
         this.handleSelection(e);
       }
+      initialSelection = null;
     });
 
     document.addEventListener("click", (event) =>
@@ -39,6 +49,7 @@ export class CurrencySelector {
 
   handleInput() {
     const userInput = this.inputElement.value.toUpperCase().trim();
+
     const filteredCodes = this.allCurrencyCodes.filter((code) =>
       code.toUpperCase().includes(userInput)
     );
@@ -61,20 +72,20 @@ export class CurrencySelector {
     const selectedCode = event.target.textContent;
     const wasEmpty = this.inputElement.value.trim() === "";
 
-    if (selectedCode === "All currencies" && wasEmpty) {
+    if (selectedCode === CurrencySelector.ALL_OPTION && wasEmpty) {
       this.hideDropdown();
       return;
     }
     const newSelection =
-      selectedCode === "All currencies" ? null : selectedCode;
+      selectedCode === CurrencySelector.ALL_OPTION ? null : selectedCode;
     const selectionChanged = newSelection !== this.selectedCurrency;
 
     if (selectionChanged) {
       this.selectedCurrency = newSelection;
       this.inputElement.value =
-        selectedCode === "All currencies" ? "" : selectedCode;
+        selectedCode === CurrencySelector.ALL_OPTION ? "" : selectedCode;
       this.onSelectCallback?.(selectedCode);
-    } else if (selectedCode === "All currencies") {
+    } else if (selectedCode === CurrencySelector.ALL_OPTION) {
       this.inputElement.value = "";
     }
     this.hideDropdown();
