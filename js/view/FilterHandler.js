@@ -1,4 +1,5 @@
 import { CurrencySelector } from "./CurrencySelector.js";
+import { CurrencyCode } from "../model/CurrencyCode.js";
 
 export class FilterHandler {
   constructor(providerFilterService, providerDisplay, filterState) {
@@ -6,8 +7,8 @@ export class FilterHandler {
     this.currencyInput = document.getElementById("select-currency");
     this.providerFilterDropdown = document.getElementById("provider-filter");
     this.bestRateDropdown = document.getElementById("best-rate");
-    this.providerFilterService = providerFilterService;
     this.providerDisplay = providerDisplay;
+    this.providerFilterService = providerFilterService;
     this.filterState = filterState;
 
     this.currencySelector = new CurrencySelector(
@@ -46,6 +47,10 @@ export class FilterHandler {
       this.filterState.setProviderType(event.target.value);
       this.applyAllFilters();
     });
+
+    this.bestRateDropdown.addEventListener("change", (event) => {
+      this.sortByBestRate(event.target.value);
+    });
   }
 
   applyAllFilters() {
@@ -58,6 +63,60 @@ export class FilterHandler {
     const filteredProviders =
       this.providerFilterService.filterProviders(filters);
     this.updateDisplay(filteredProviders);
+  }
+
+  sortByBestRate(sortType) {
+    const currency = this.filterState.getCurrency();
+
+    if (!currency || currency === "All currencies" || currency === null) {
+      return;
+    }
+
+    const filters = {
+      providerType: this.filterState.getProviderType(),
+      searchTerm: this.filterState.getSearchedProviderName(),
+      currency: currency,
+    };
+
+    let filteredProviders = this.providerFilterService.filterProviders(filters);
+
+    if (filteredProviders && filteredProviders.length >= 2) {
+      if (sortType === "best-buy-rate") {
+        this.sortByRate(filteredProviders, currency, "buy");
+      } else if (sortType === "best-sell-rate") {
+        this.sortByRate(filteredProviders, currency, "sell");
+      }
+      this.updateDisplay(filteredProviders);
+    } else {
+      this.updateDisplay(filteredProviders);
+    }
+  }
+
+  sortByRate(providers, currency, buyOrSell) {
+    providers.sort((providerA, providerB) => {
+      let rateA, rateB;
+      if (buyOrSell === "buy") {
+        rateA = this.getBuyRate(providerA, currency);
+        rateB = this.getBuyRate(providerB, currency);
+        return rateA - rateB;
+      } else {
+        rateA = this.getSellRate(providerA, currency);
+        rateB = this.getSellRate(providerB, currency);
+        return rateB - rateA;
+      }
+    });
+  }
+
+  getBuyRate(provider, currency) {
+    const currencyCode = new CurrencyCode(currency);
+    const rate = provider.getRate(currencyCode);
+    return rate ? rate.getBuyRate() : 0;
+  }
+
+  getSellRate(provider, currency) {
+    const currencyCode = new CurrencyCode(currency);
+    const rate = provider.getRate(currencyCode);
+    return rate ? rate.getSellRate() : 0;
   }
 
   updateDisplay(providers) {
@@ -93,6 +152,7 @@ export class FilterHandler {
     this.providerSearchInput.value = "";
     this.providerFilterDropdown.value = "all";
     this.currencyInput.value = "";
+    this.bestRateDropdown.value = "noRate";
     this.applyAllFilters();
   }
 }
