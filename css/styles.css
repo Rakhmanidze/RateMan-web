@@ -83,13 +83,7 @@ h2 {
   display: flex;
   gap: 7px;
   flex-wrap: wrap;
-  align-items: flex-end;
-}
-
-.sort-by-section {
-  display: flex;
   align-items: center;
-  gap: 7px;
 }
 
 .sort-btn,
