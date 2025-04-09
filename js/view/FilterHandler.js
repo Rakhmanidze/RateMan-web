@@ -5,7 +5,7 @@ export class FilterHandler {
     this.providerSearchInput = document.getElementById("provider-search");
     this.currencyInput = document.getElementById("select-currency");
     this.providerFilterDropdown = document.getElementById("provider-filter");
-    this.bestRateBtn = document.querySelector(".sort-btn");
+    this.bestRateDropdown = document.getElementById("best-rate");
     this.providerFilterService = providerFilterService;
     this.providerDisplay = providerDisplay;
     this.filterState = filterState;
@@ -67,12 +67,12 @@ export class FilterHandler {
     const isCertainCurrency =
       currency && currency !== "All currencies" && currency !== null;
     const providerCount = providers ? providers.length : 0;
-    const isBestRateBtn = isCertainCurrency && providerCount >= 2;
+    const IsbestRateDropdown = isCertainCurrency && providerCount >= 2;
 
-    if (isBestRateBtn) {
-      this.bestRateBtn.classList.remove("hidden");
+    if (IsbestRateDropdown) {
+      this.bestRateDropdown.classList.remove("hidden");
     } else {
-      this.bestRateBtn.classList.add("hidden");
+      this.bestRateDropdown.classList.add("hidden");
     }
 
     if (!providers || providers.length === 0) {

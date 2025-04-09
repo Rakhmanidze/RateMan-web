@@ -86,8 +86,8 @@ h2 {
   align-items: center;
 }
 
-.sort-btn,
-.provider-select {
+.provider-select,
+.best-rate-select {
   padding: 8px 12px;
   border: 1px solid var(--container-border);
   border-radius: 4px;
@@ -104,26 +104,17 @@ h2 {
   width: 174px;
 }
 
-.provider-select:focus {
+.provider-select:focus,
+.best-rate-select:focus {
   outline: none;
   border-color: var(--input-focus-border);
 }
 
-.sort-btn {
-  width: 96px;
+.best-rate-select {
+  width: 139px;
 }
 
-.sort-btn:hover {
-  background-color: var(--hover-btn-gray);
-}
-
-.sort-btn.active {
-  background-color: #e0e0e0;
-  border-color: #999;
-  font-weight: 500;
-}
-
-.sort-btn.hidden {
+.best-rate-select.hidden {
   display: none;
 }
 
@@ -288,8 +279,8 @@ footer a:hover {
     padding: 6px 10px;
     font-size: 0.875rem;
   }
-  .sort-btn {
-    width: 83px;
+  .best-rate-select {
+    width: 140px;
     height: 30px;
     padding: 6px 10px;
     font-size: 0.875rem;
