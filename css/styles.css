@@ -123,6 +123,10 @@ h2 {
   font-weight: 500;
 }
 
+.sort-btn.hidden {
+  display: none;
+}
+
 .currency-combobox {
   position: relative;
   width: 131px;
