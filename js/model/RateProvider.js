@@ -1,7 +1,8 @@
 import { CurrencyCode } from "./CurrencyCode.js";
 import { CurrencyRate } from "./CurrencyRate.js";
+import { PROVIDER_TYPE } from "./constants.js";
 
-const VALID_TYPES = ["bank", "exchange", "crypto-exchange"];
+const VALID_TYPES = Object.values(PROVIDER_TYPE);
 
 export class RateProvider {
   constructor(name, baseCurrency, rates, ratesDate, phoneNumber, type) {

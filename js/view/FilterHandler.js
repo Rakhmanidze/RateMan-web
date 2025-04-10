@@ -1,5 +1,6 @@
 import { CurrencySelector } from "./CurrencySelector.js";
 import { CurrencyCode } from "../model/CurrencyCode.js";
+import { SORT_OPTIONS, FILTER_PROVIDER_TYPE } from "../model/constants.js";
 
 export class FilterHandler {
   constructor(providerFilterService, providerDisplay, filterState) {
@@ -81,9 +82,9 @@ export class FilterHandler {
     let filteredProviders = this.providerFilterService.filterProviders(filters);
 
     if (filteredProviders && filteredProviders.length >= 2) {
-      if (sortType === "best-buy-rate") {
+      if (sortType === SORT_OPTIONS.BEST_BUY) {
         this.sortByRate(filteredProviders, currency, "buy");
-      } else if (sortType === "best-sell-rate") {
+      } else if (sortType === SORT_OPTIONS.BEST_SELL) {
         this.sortByRate(filteredProviders, currency, "sell");
       }
       this.updateDisplay(filteredProviders);
@@ -150,9 +151,9 @@ export class FilterHandler {
     this.filterState.setSearchedProviderName("");
     this.filterState.setProviderType("all");
     this.providerSearchInput.value = "";
-    this.providerFilterDropdown.value = "all";
+    this.providerFilterDropdown.value = FILTER_PROVIDER_TYPE.ALL;
     this.currencyInput.value = "";
-    this.bestRateDropdown.value = "noRate";
+    this.bestRateDropdown.value = SORT_OPTIONS.NO_SORT;
     this.applyAllFilters();
   }
 }

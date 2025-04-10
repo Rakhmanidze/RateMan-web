@@ -1,4 +1,5 @@
 import { RateProvider } from "../model/RateProvider.js";
+import { PROVIDER_TYPE, FILTER_PROVIDER_TYPE } from "../model/constants.js";
 
 export class RateProviderFilterService {
   constructor() {
@@ -17,15 +18,15 @@ export class RateProviderFilterService {
 
       let filteredProviders = [...this.originalProviders];
 
-      if (providerType !== "all") {
+      if (providerType !== FILTER_PROVIDER_TYPE.ALL) {
         filteredProviders = filteredProviders.filter((provider) => {
           const currentProviderType = provider.getType();
-          if (providerType === "banks") {
-            return currentProviderType === "bank";
-          } else if (providerType === "exchanges") {
-            return currentProviderType === "exchange";
-          } else if (providerType === "crypto-exchanges") {
-            return currentProviderType === "crypto-exchange";
+          if (providerType === FILTER_PROVIDER_TYPE.BANKS) {
+            return currentProviderType === PROVIDER_TYPE.BANK;
+          } else if (providerType === FILTER_PROVIDER_TYPE.EXCHANGES) {
+            return currentProviderType === PROVIDER_TYPE.EXCHANGE;
+          } else if (providerType === FILTER_PROVIDER_TYPE.CRYPTO_EXCHANGES) {
+            return currentProviderType === PROVIDER_TYPE.CRYPTO_EXCHANGE;
           }
         });
       }
