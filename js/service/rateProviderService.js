@@ -18,6 +18,9 @@ async function fetchAllProviderRatesData() {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
+    if (!data || !data.kurzy) {
+      throw new Error("Invalid API response structure");
+    }
 
     localStorage.setItem("apiData", JSON.stringify(data));
 

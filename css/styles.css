@@ -184,7 +184,6 @@ h2 {
   padding: 10px;
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--text-primary);
   background-color: var(--table-header-bg);
   border-bottom: 2px solid var(--container-border);
   border-radius: 4px 4px 0 0;

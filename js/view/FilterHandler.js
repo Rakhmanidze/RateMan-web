@@ -69,7 +69,7 @@ export class FilterHandler {
   sortByBestRate(sortType) {
     const currency = this.filterState.getCurrency();
 
-    if (!currency || currency === "All currencies" || currency === null) {
+    if (!currency) {
       return;
     }
 
