@@ -1,4 +1,4 @@
-import { CurrencySelector } from "CurrencySelector.js";
+import { CurrencySelector } from "./CurrencySelector.js";
 import { CurrencyCode } from "/RateMan-web/model/CurrencyCode.js";
 import {
   SORT_OPTIONS,
