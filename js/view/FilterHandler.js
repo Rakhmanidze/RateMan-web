@@ -16,7 +16,7 @@ export class FilterHandler {
       document.getElementById("select-currency"),
       document.getElementById("currency-dropdown"),
       (selectedCode) => {
-        this.filterState.setCurrency(selectedCode);
+        this.filterState.setCurrency(selectedCode || "");
         this.applyAllFilters();
       }
     );
@@ -31,10 +31,7 @@ export class FilterHandler {
   initializeFromState() {
     this.providerSearchInput.value = this.filterState.getSearchedProviderName();
     this.providerFilterDropdown.value = this.filterState.getProviderType();
-    this.currencyInput.value =
-      this.filterState.getCurrency() === "All currencies"
-        ? ""
-        : this.filterState.getCurrency() || "";
+    this.currencyInput.value = this.filterState.getCurrency() || "";
     this.applyAllFilters();
   }
 

@@ -76,18 +76,18 @@ export class CurrencySelector {
       this.hideDropdown();
       return;
     }
+
     const newSelection =
       selectedCode === CurrencySelector.ALL_OPTION ? null : selectedCode;
     const selectionChanged = newSelection !== this.selectedCurrency;
 
-    if (selectionChanged) {
-      this.selectedCurrency = newSelection;
-      this.inputElement.value =
-        selectedCode === CurrencySelector.ALL_OPTION ? "" : selectedCode;
-      this.onSelectCallback?.(selectedCode);
-    } else if (selectedCode === CurrencySelector.ALL_OPTION) {
-      this.inputElement.value = "";
-    }
+    this.selectedCurrency = newSelection;
+    this.inputElement.value =
+      selectedCode === CurrencySelector.ALL_OPTION ? "" : selectedCode;
+    this.onSelectCallback?.(
+      selectedCode === CurrencySelector.ALL_OPTION ? null : selectedCode
+    );
+
     this.hideDropdown();
   }
 

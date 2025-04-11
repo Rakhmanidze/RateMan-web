@@ -37,7 +37,7 @@ export class RateProviderFilterService {
       );
     }
 
-    if (currency && currency !== "All currencies") {
+    if (currency && currency !== "All currencies" && currency !== "") {
       filteredProviders = filteredProviders
         .map((provider) => {
           const existingRate = provider
