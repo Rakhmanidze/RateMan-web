@@ -5,6 +5,7 @@ import { phoneNumberData } from "../../sources/config/phoneNumberData.js";
 import { API_URL } from "../../sources/config/apiConfig.js";
 import { bankNames } from "../../sources/config/bankNames.js";
 
+// Fetches rates from API with fallback to cached data
 async function fetchAllProviderRatesData() {
   try {
     const response = await fetch(API_URL, {
@@ -31,6 +32,7 @@ async function fetchAllProviderRatesData() {
   }
 }
 
+// Loads cached rates from localStorage
 function loadDataFromLocalStorage() {
   const storedData = localStorage.getItem("apiData");
   if (storedData) {
@@ -39,6 +41,12 @@ function loadDataFromLocalStorage() {
   return null;
 }
 
+/**
+ * Converts raw rate data to CurrencyRate objects
+ * @param {Object} kurzy - Raw rate data from API
+ * @param {boolean} isCNB - Flag for Czech National Bank special handling
+ * @returns {CurrencyRate[]} Array of valid currency rates
+ */
 function createRates(kurzy, isCNB) {
   return Object.entries(kurzy)
     .map(([currency, rateData]) => {
@@ -75,6 +83,15 @@ function createRates(kurzy, isCNB) {
     .filter((rate) => rate !== null);
 }
 
+/**
+ * Creates a RateProvider instance
+ * @param {string} name - Provider name
+ * @param {CurrencyRate[]} rates - Array of currency rates
+ * @param {string} date - Rate date string
+ * @param {string|null} phoneNumber - Provider contact number
+ * @param {boolean} isBank - Whether provider is a bank
+ * @returns {RateProvider} New provider instance
+ */
 function createProvider(name, rates, date, phoneNumber, isBank) {
   const type = isBank ? "bank" : "exchange";
   return new RateProvider(
@@ -87,11 +104,22 @@ function createProvider(name, rates, date, phoneNumber, isBank) {
   );
 }
 
+/**
+ * Finds phone number for provider
+ * @param {string} providerName - Name to search for
+ * @param {Array} phoneData - Phone number dataset
+ * @returns {string|null} Phone number if found
+ */
 function getPhoneNumber(providerName, phoneData) {
   const provider = phoneData.find((p) => p.name === providerName);
   return provider ? provider.phoneNumber : null;
 }
 
+/**
+ * Processes raw provider API data
+ * @param {Object} data - Raw provider data from API
+ * @returns {RateProvider|null} Processed provider or null if invalid
+ */
 function processProviderData(data) {
   if (!data || !data.kurzy) {
     console.warn("Invalid provider data received");
@@ -121,6 +149,7 @@ function processProviderData(data) {
   }
 }
 
+// Main function: fetches and processes all provider rates
 export async function fetchAndProcessAllProviderRates() {
   try {
     const allProviderData = await fetchAllProviderRatesData();
