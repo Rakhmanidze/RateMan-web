@@ -1,3 +1,6 @@
+/**
+ * Represents a valid currency code with validation
+ */
 export class CurrencyCode {
   static VALID_CODES = new Set([
     // Major currencies

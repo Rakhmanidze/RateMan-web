@@ -1,3 +1,4 @@
+/** Manages filter state with localStorage persistence */
 export class FilterState {
   constructor() {
     this.searchProviderName = localStorage.getItem("searchProviderName") || "";

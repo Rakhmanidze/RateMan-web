@@ -4,7 +4,16 @@ import { PROVIDER_TYPE } from "./constants.js";
 
 const VALID_TYPES = Object.values(PROVIDER_TYPE);
 
+/** Represents a currency rate provider with validation */
 export class RateProvider {
+  /**
+   * @param {string} name - Provider name
+   * @param {CurrencyCode} baseCurrency - Base currency
+   * @param {CurrencyRate[]} rates - Array of currency rates
+   * @param {string} ratesDate - Date of rates
+   * @param {string} phoneNumber - Contact number
+   * @param {string} type - Provider type (from PROVIDER_TYPE)
+   */
   constructor(name, baseCurrency, rates, ratesDate, phoneNumber, type) {
     if (typeof name !== "string") {
       throw new Error("RateProvider name must be a string");
