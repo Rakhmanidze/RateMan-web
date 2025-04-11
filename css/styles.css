@@ -70,19 +70,16 @@ h2 {
 
 .sorting-container {
   margin: 15px 0;
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .controls-label {
   font-weight: bold;
   margin: 0;
   font-size: 1rem;
-}
-
-.sort-options {
-  display: flex;
-  gap: 7px;
-  flex-wrap: wrap;
-  align-items: center;
 }
 
 .provider-select,
