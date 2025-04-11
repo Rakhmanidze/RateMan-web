@@ -1,3 +1,7 @@
+/**
+ * List of supported bank names for rate providers
+ * @constant {string[]}
+ */
 export const bankNames = [
   "Komerční banka",
   "Česká národní banka",

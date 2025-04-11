@@ -1,3 +1,7 @@
+/**
+ * Contact phone numbers for financial institutions
+ * @type {Array<{name: string, phoneNumber: string}>}
+ */
 export const phoneNumberData = [
   {
     name: "AKCENTA CZ",

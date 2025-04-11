@@ -5,6 +5,10 @@ import { fetchAndProcessAllProviderRates } from "./service/RateProviderService.j
 import { FilterState } from "./model/FilterState.js";
 import { LogoHandler } from "./view/LogoHandler.js";
 
+/**
+ * Main application entry point for exchange rate viewer
+ * Initializes services and UI components, fetches initial data
+ */
 const providerDisplay = new RateProviderDisplay("provider-display");
 const providerFilterService = new RateProviderFilterService();
 const filterState = new FilterState();
@@ -16,6 +20,7 @@ const filterHandler = new FilterHandler(
 
 new LogoHandler(filterHandler);
 
+// Fetch provider data and initialize application
 fetchAndProcessAllProviderRates()
   .then((providers) => {
     providerFilterService.setProviders(providers);

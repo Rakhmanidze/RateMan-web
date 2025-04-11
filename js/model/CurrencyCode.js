@@ -2,6 +2,10 @@
  * Represents a valid currency code with validation
  */
 export class CurrencyCode {
+  /**
+   * Set of valid currency codes supported by the application
+   * @type {Set<string>}
+   */
   static VALID_CODES = new Set([
     // Major currencies
     "USD",
