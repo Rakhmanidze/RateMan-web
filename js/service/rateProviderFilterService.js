@@ -1,5 +1,8 @@
 import { RateProvider } from "rateman/model/RateProvider.js";
-import { PROVIDER_TYPE, FILTER_PROVIDER_TYPE } from "../model/constants.js";
+import {
+  PROVIDER_TYPE,
+  FILTER_PROVIDER_TYPE,
+} from "rateman/model/constants.js";
 
 /** Filters rate providers by type, search term, and currency */
 export class RateProviderFilterService {
