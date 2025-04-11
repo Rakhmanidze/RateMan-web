@@ -1,9 +1,9 @@
-import { FilterHandler } from "https://rakhmanidze.github.io/RateMan-web/js/view/FilterHandler.js";
-import { RateProviderDisplay } from "https://rakhmanidze.github.io/RateMan-web/js/view/RateProviderDisplay.js";
-import { RateProviderFilterService } from "https://rakhmanidze.github.io/RateMan-web/js/service/RateProviderFilterService.js";
-import { fetchAndProcessAllProviderRates } from "https://rakhmanidze.github.io/RateMan-web/js/service/RateProviderService.js";
-import { FilterState } from "https://rakhmanidze.github.io/RateMan-web/js/model/FilterState.js";
-import { LogoHandler } from "https://rakhmanidze.github.io/RateMan-web/js/view/LogoHandler.js";
+import { FilterHandler } from "./js/view/FilterHandler.js";
+import { RateProviderDisplay } from "./js/view/RateProviderDisplay.js";
+import { RateProviderFilterService } from "./js/service/RateProviderFilterService.js";
+import { fetchAndProcessAllProviderRates } from "./js/service/RateProviderService.js";
+import { FilterState } from "./js/model/FilterState.js";
+import { LogoHandler } from "./js/view/LogoHandler.js";
 
 /**
  * Main application entry point for exchange rate viewer
