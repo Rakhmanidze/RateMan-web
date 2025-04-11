@@ -1,4 +1,4 @@
-import { CurrencyCode } from "../model/CurrencyCode.js";
+import { CurrencyCode } from "rateman/model/CurrencyCode.js";
 
 /**
  * Handles currency selection UI with dropdown filtering

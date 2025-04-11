@@ -1,6 +1,6 @@
-import { CurrencySelector } from "./CurrencySelector.js";
-import { CurrencyCode } from "../model/CurrencyCode.js";
-import { SORT_OPTIONS, FILTER_PROVIDER_TYPE } from "../model/constants.js";
+import { CurrencySelector } from "CurrencySelector.js";
+import { CurrencyCode } from "rateman/model/CurrencyCode.js";
+import { SORT_OPTIONS, FILTER_PROVIDER_TYPE } from "rateman/model/constants.js";
 
 /**
  * Manages filtering and sorting of providers based on various criteria

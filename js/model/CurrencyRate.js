@@ -1,4 +1,4 @@
-import { CurrencyCode } from "./CurrencyCode.js";
+import { CurrencyCode } from "CurrencyCode.js";
 
 /**
  * Represents currency exchange rates with buy/sell values
