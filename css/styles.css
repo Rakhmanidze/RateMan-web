@@ -1,25 +1,22 @@
 :root {
-  --page-bg: #1a1a1a;
-  --provider-bg: #2d2d2d;
-  --container-border: #4a4a4a;
-  --provider-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --footer-text: #a0a0a0;
+  --color-dark: #1a1a1a;
+  --color-gray-dark: #2d2d2d;
+  --color-gray-medium: #4a4a4a;
   --input-focus-border: #6b7280;
   --table-header-bg: #3c3c3c;
-  --hover-shadow-color: rgba(0, 0, 0, 0.3);
-  --not-found-bg: #2d2d2d;
-  --text-header: #e0e0e0;
-  --hover-btn-gray: #3c3c3c;
+  --color-text-light: #e0e0e0;
+  --color-footer-text: #a0a0a0;
+  --hover-gray: #3c3c3c;
 }
 
 body {
-  background: var(--page-bg);
+  background: var(--color-dark);
   max-width: 700px;
   margin: 0 auto;
   padding: 20px;
   font-size: 16px;
   overflow-y: scroll;
-  color: var(--text-header);
+  color: var(--color-text-light);
 }
 
 main {
@@ -51,20 +48,20 @@ main {
 
 h2 {
   margin: 0;
-  color: var(--text-header);
+  color: var(--color-text-light);
 }
 
 .search-and-filter input {
   padding: 8px 12px;
-  border: 1px solid var(--container-border);
+  border: 1px solid var(--color-gray-medium);
   border-radius: 4px;
   width: 230px;
   transition: border-color 0.3s ease;
   height: 36px;
   box-sizing: border-box;
   font-size: 1rem;
-  background-color: var(--provider-bg);
-  color: var(--text-header);
+  background-color: var(--color-gray-dark);
+  color: var(--color-text-light);
 }
 .search-and-filter input:focus {
   outline: none;
@@ -91,16 +88,16 @@ h2 {
 .provider-select,
 .best-rate-select {
   padding: 8px 12px;
-  border: 1px solid var(--container-border);
+  border: 1px solid var(--color-gray-medium);
   border-radius: 4px;
-  background-color: var(--provider-bg);
+  background-color: var(--color-gray-dark);
   font-size: 1rem;
   cursor: pointer;
   transition: border-color 0.3s ease, background-color 0.2s ease;
   height: 36px;
   box-sizing: border-box;
   line-height: 1;
-  color: var(--text-header);
+  color: var(--color-text-light);
 }
 
 .provider-select {
@@ -129,13 +126,13 @@ h2 {
 .currency-combobox input {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid var(--container-border);
+  border: 1px solid var(--color-gray-medium);
   border-radius: 4px;
   font-size: 1rem;
   box-sizing: border-box;
   transition: border-color 0.3s ease;
-  background-color: var(--provider-bg);
-  color: var(--text-header);
+  background-color: var(--color-gray-dark);
+  color: var(--color-text-light);
 }
 
 .currency-combobox input:focus {
@@ -148,14 +145,13 @@ h2 {
   top: 100%;
   left: 0;
   right: 0;
-  background-color: var(--provider-bg);
-  border: 1px solid var(--container-border);
+  background-color: var(--color-gray-dark);
+  border: 1px solid var(--color-gray-medium);
   border-radius: 4px;
   max-height: 200px;
   overflow-y: auto;
   display: none;
   z-index: 10;
-  box-shadow: var(--provider-shadow);
 }
 
 .currency-options.show {
@@ -169,19 +165,18 @@ h2 {
 }
 
 .currency-options div:hover {
-  background-color: var(--hover-btn-gray);
+  background-color: var(--hover-gray);
 }
 
 .provider-section {
-  background-color: var(--provider-bg);
-  box-shadow: var(--provider-shadow);
+  background-color: var(--color-gray-dark);
   border-radius: 8px;
   padding: 10px;
   margin: 15px 0;
-  border: 1px solid var(--container-border);
+  border: 1px solid var(--color-gray-medium);
   width: 100%;
   box-sizing: border-box;
-  transition: transform 0.3s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease;
 }
 
 .provider-section h2 {
@@ -190,13 +185,12 @@ h2 {
   font-size: 1.25rem;
   font-weight: 600;
   background-color: var(--table-header-bg);
-  border-bottom: 2px solid var(--container-border);
+  border-bottom: 2px solid var(--color-gray-medium);
   border-radius: 4px 4px 0 0;
 }
 
 .provider-section:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px var(--hover-shadow-color);
 }
 
 table {
@@ -209,7 +203,7 @@ th,
 td {
   padding: 12px;
   text-align: left;
-  border-bottom: 1px solid var(--container-border);
+  border-bottom: 1px solid var(--color-gray-medium);
 }
 
 th {
@@ -220,7 +214,7 @@ th {
 .no-results {
   padding: 15px;
   text-align: center;
-  background-color: var(--not-found-bg);
+  background-color: var(--color-gray-dark);
   border-radius: 4px;
   margin: 10px 0;
 }
@@ -228,12 +222,12 @@ th {
 footer {
   margin-top: 30px;
   text-align: center;
-  color: var(--footer-text);
+  color: var(--color-footer-text);
   font-size: 0.9em;
 }
 
 footer a {
-  color: var(--footer-text);
+  color: var(--color-footer-text);
   text-decoration: none;
 }
 

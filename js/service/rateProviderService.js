@@ -26,7 +26,7 @@ async function fetchAllProviderRatesData() {
 
     return data;
   } catch (error) {
-    console.error("Error fetching rates data:", error);
+    console.log("Error fetching rates data. Using cached data (offline mode)");
     return loadDataFromLocalStorage();
   }
 }
