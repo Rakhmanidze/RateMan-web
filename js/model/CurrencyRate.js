@@ -1,4 +1,4 @@
-import { CurrencyCode } from "https://rakhmanidze.github.io/RateMan-web/js/model/CurrencyCode.js";
+import { CurrencyCode } from "./CurrencyCode.js";
 
 /**
  * Represents currency exchange rates with buy/sell values
