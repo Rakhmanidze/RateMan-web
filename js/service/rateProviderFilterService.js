@@ -1,4 +1,4 @@
-import { RateProvider } from "/js/model/RateProvider.js";
+import { RateProvider } from "/RateMan-web/js/model/RateProvider.js";
 import { PROVIDER_TYPE, FILTER_PROVIDER_TYPE } from "../model/constants.js";
 
 /** Filters rate providers by type, search term, and currency */

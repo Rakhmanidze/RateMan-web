@@ -1,6 +1,6 @@
-import { CurrencyCode } from "/js/model/CurrencyCode.js";
-import { CurrencyRate } from "/js/model/CurrencyRate.js";
-import { PROVIDER_TYPE } from "/js/model/constants.js";
+import { CurrencyCode } from "/RateMan-web/js/model/CurrencyCode.js";
+import { CurrencyRate } from "/RateMan-web/js/model/CurrencyRate.js";
+import { PROVIDER_TYPE } from "/RateMan-web/js/model/constants.js";
 
 const VALID_TYPES = Object.values(PROVIDER_TYPE);
 

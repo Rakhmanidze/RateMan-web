@@ -1,9 +1,9 @@
-import { CurrencyCode } from "/js/model/CurrencyCode.js";
-import { CurrencyRate } from "/js/model/CurrencyRate.js";
-import { RateProvider } from "/js/model/RateProvider.js";
-import { phoneNumberData } from "/js/sources/config/phoneNumberData.js";
-import { API_URL } from "/js/sources/config/apiConfig.js";
-import { bankNames } from "/js/sources/config/bankNames.js";
+import { CurrencyCode } from "/RateMan-web/js/model/CurrencyCode.js";
+import { CurrencyRate } from "/RateMan-web/js/model/CurrencyRate.js";
+import { RateProvider } from "/RateMan-web/js/model/RateProvider.js";
+import { phoneNumberData } from "/RateMan-web/js/sources/config/phoneNumberData.js";
+import { API_URL } from "/RateMan-web/js/sources/config/apiConfig.js";
+import { bankNames } from "/RateMan-web/js/sources/config/bankNames.js";
 
 // Fetches rates from API with fallback to cached data
 async function fetchAllProviderRatesData() {
