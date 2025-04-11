@@ -1,4 +1,4 @@
-import { CurrencyCode } from "/RateMan-web/model/CurrencyCode.js";
+import { CurrencyCode } from "https://rakhmanidze.github.io/RateMan-web/js/model/CurrencyCode.js";
 
 /**
  * Handles currency selection UI with dropdown filtering
