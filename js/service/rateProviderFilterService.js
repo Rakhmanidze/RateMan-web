@@ -1,4 +1,4 @@
-import { RateProvider } from "rateman/model/RateProvider.js";
+import { RateProvider } from "RateMan-web/model/RateProvider.js";
 import {
   PROVIDER_TYPE,
   FILTER_PROVIDER_TYPE,
