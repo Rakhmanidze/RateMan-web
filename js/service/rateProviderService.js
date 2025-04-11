@@ -13,21 +13,33 @@ async function fetchAllProviderRatesData() {
       headers: {
         Accept: "application/json",
       },
+      mode: "cors",
+      cache: "no-store",
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(
+        `HTTP error! Status: ${response.status}, Status Text: ${response.statusText}`
+      );
     }
+
     const data = await response.json();
-    if (!data || !data.kurzy) {
-      throw new Error("Invalid API response structure");
+
+    if (!Array.isArray(data) || data.length === 0 || !data[0].kurzy) {
+      throw new Error(
+        "Invalid API response structure: Expected an array with 'kurzy' properties"
+      );
     }
 
     localStorage.setItem("apiData", JSON.stringify(data));
-
     return data;
   } catch (error) {
-    console.log("Error fetching rates data. Using cached data (offline mode)");
+    console.error("Fetch failed:", {
+      message: error.message,
+      stack: error.stack,
+      url: API_URL,
+    });
+    console.log("Falling back to cached data due to fetch error.");
     return loadDataFromLocalStorage();
   }
 }
