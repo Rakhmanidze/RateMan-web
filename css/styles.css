@@ -56,6 +56,8 @@ h2 {
   border: 1px solid var(--color-gray-medium);
   border-radius: 4px;
   width: 230px;
+  -webkit-transition: border-color 0.3s ease;
+  -moz-transition: border-color 0.3s ease;
   transition: border-color 0.3s ease;
   height: 36px;
   box-sizing: border-box;
@@ -90,6 +92,8 @@ h2 {
   background-color: var(--color-gray-dark);
   font-size: 1rem;
   cursor: pointer;
+  -webkit-transition: border-color 0.3s ease, background-color 0.2s ease;
+  -moz-transition: border-color 0.3s ease, background-color 0.2s ease;
   transition: border-color 0.3s ease, background-color 0.2s ease;
   height: 36px;
   box-sizing: border-box;
@@ -127,6 +131,8 @@ h2 {
   border-radius: 4px;
   font-size: 1rem;
   box-sizing: border-box;
+  -webkit-transition: border-color 0.3s ease;
+  -moz-transition: border-color 0.3s ease;
   transition: border-color 0.3s ease;
   background-color: var(--color-gray-dark);
   color: var(--color-text-light);
@@ -173,6 +179,8 @@ h2 {
   border: 1px solid var(--color-gray-medium);
   width: 100%;
   box-sizing: border-box;
+  -webkit-transition: transform 0.3s ease;
+  -moz-transition: transform 0.3s ease;
   transition: transform 0.3s ease;
 }
 
@@ -187,6 +195,8 @@ h2 {
 }
 
 .provider-section:hover {
+  -webkit-transform: translateY(-2px);
+  -moz-transform: translateY(-2px);
   transform: translateY(-2px);
 }
 
