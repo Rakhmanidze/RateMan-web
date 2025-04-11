@@ -1,5 +1,11 @@
 /** Manages filter state with localStorage persistence */
 export class FilterState {
+  /**
+   * @property {string} searchProviderName Provider search term (default "")
+   * @property {string} currency Selected currency (default "")
+   * @property {string} providerType Provider filter (default "all")
+   * @property {string} sortBy Sorting method (default "noRateSorting")
+   */
   constructor() {
     this.searchProviderName = localStorage.getItem("searchProviderName") || "";
     this.currency = localStorage.getItem("currency") || "";

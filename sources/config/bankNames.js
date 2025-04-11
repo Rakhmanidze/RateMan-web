@@ -11,4 +11,5 @@ export const bankNames = [
   "Trinity Bank",
   "MONETA",
   "Oberbank AG",
+  "Česká spořitelna",
 ];
