@@ -7,6 +7,11 @@ import { bankNames } from "../../sources/config/bankNames.js";
 
 // Fetches rates from API with fallback to cached data
 async function fetchAllProviderRatesData() {
+  if (!navigator.onLine) {
+    console.log("No internet connection detected. Using cached data.");
+    return loadDataFromLocalStorage();
+  }
+
   try {
     const response = await fetch(API_URL, {
       method: "GET",
