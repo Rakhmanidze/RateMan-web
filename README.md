@@ -2,11 +2,11 @@
 
 A web application developed with JavaScript, HTML, and CSS, showcasing real-time exchange rates for banks and exchanges in Prague. RateMan uses the Fetch API to pull data from the kurzy.cz public API, providing users with up-to-date currency exchange rates. The app includes filters and sorting options to find the best buy/sell rates, all wrapped in a responsive, user-friendly interface.
 
-## Project Goal (_Cíl projektu_)
+## Project Goal
 
 The goal of RateMan is to create an intuitive and reliable tool for comparing currency exchange rates across various providers in Prague, including banks, exchanges, and crypto exchanges. It aims to help users—such as travelers, investors, or locals—find the best rates for buying or selling currencies by offering real-time data, powerful filtering, and a seamless experience across desktop and mobile devices.
 
-## Approach (_Postup_)
+## Approach
 
 RateMan was built using a modular and maintainable architecture to ensure scalability and ease of development:
 
@@ -17,7 +17,7 @@ RateMan was built using a modular and maintainable architecture to ensure scalab
 5. **State Management**: `FilterState` persists user preferences (currency, provider type, search term) in `localStorage` to maintain state across page reloads.
 6. **Development Process**: The project was developed iteratively, starting with core data fetching, followed by filtering/sorting logic, and finalized with responsive UI design. Testing was conducted in modern browsers (Chrome, Firefox, Edge).
 
-## Features (_Popis funkčnosti_)
+## Features
 
 RateMan offers the following functionality to deliver a comprehensive currency comparison experience:
 
@@ -47,7 +47,3 @@ RateMan offers the following functionality to deliver a comprehensive currency c
   - Media queries for responsive design.
   - CSS3 transitions (`transition: border-color 0.3s ease`) and transforms (`transform: translateY(-2px)`).
   - Custom properties (`--color-dark`, `--color-text-light`) for theming.
-
-## Notes
-
-This documentation assumes the project is hosted with assets (`/sources/logo.png`, `/sources/icon.png`) and the API is accessible. Future improvements could include enhanced offline support, SVG visualizations, or History API integration for browser navigation.
