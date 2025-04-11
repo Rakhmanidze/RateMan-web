@@ -1,9 +1,9 @@
-import { FilterHandler } from "../js/view/FilterHandler.js";
-import { RateProviderDisplay } from "../js/view/RateProviderDisplay.js";
-import { RateProviderFilterService } from "../js/service/RateProviderFilterService.js";
-import { fetchAndProcessAllProviderRates } from "../js/service/RateProviderService.js";
-import { FilterState } from "../js/model/FilterState.js";
-import { LogoHandler } from "../js/view/LogoHandler.js";
+import { FilterHandler } from "/js/view/FilterHandler.js";
+import { RateProviderDisplay } from "/js/view/RateProviderDisplay.js";
+import { RateProviderFilterService } from "/service/RateProviderFilterService.js";
+import { fetchAndProcessAllProviderRates } from "/js/service/RateProviderService.js";
+import { FilterState } from "/js/model/FilterState.js";
+import { LogoHandler } from "/js/view/LogoHandler.js";
 
 /**
  * Main application entry point for exchange rate viewer
