@@ -2,7 +2,15 @@ import { CurrencySelector } from "./CurrencySelector.js";
 import { CurrencyCode } from "../model/CurrencyCode.js";
 import { SORT_OPTIONS, FILTER_PROVIDER_TYPE } from "../model/constants.js";
 
+/**
+ * Manages filtering and sorting of providers based on various criteria
+ */
 export class FilterHandler {
+  /**
+   * @param {Object} providerFilterService - Service for filtering providers
+   * @param {Object} providerDisplay - Service for displaying providers
+   * @param {Object} filterState - State management for filters
+   */
   constructor(providerFilterService, providerDisplay, filterState) {
     this.providerSearchInput = document.getElementById("provider-search");
     this.currencyInput = document.getElementById("select-currency");
@@ -28,6 +36,9 @@ export class FilterHandler {
     this.setupEventListeners();
   }
 
+  /**
+   * Sets initial UI state from stored filter state
+   */
   initializeFromState() {
     this.providerSearchInput.value = this.filterState.getSearchedProviderName();
     this.providerFilterDropdown.value = this.filterState.getProviderType();
@@ -35,6 +46,9 @@ export class FilterHandler {
     this.applyAllFilters();
   }
 
+  /**
+   * Attaches event listeners to filter UI elements
+   */
   setupEventListeners() {
     this.providerSearchInput.addEventListener("input", (event) => {
       this.filterState.setSearchedProviderName(event.target.value);
@@ -51,6 +65,9 @@ export class FilterHandler {
     });
   }
 
+  /**
+   * Attaches event listeners to filter UI elements
+   */
   applyAllFilters() {
     const filters = {
       providerType: this.filterState.getProviderType(),
@@ -63,6 +80,10 @@ export class FilterHandler {
     this.updateDisplay(filteredProviders);
   }
 
+  /**
+   * Sorts providers by rate type if currency is selected
+   * @param {string} sortType - Type of sort to apply
+   */
   sortByBestRate(sortType) {
     const currency = this.filterState.getCurrency();
 
@@ -90,6 +111,12 @@ export class FilterHandler {
     }
   }
 
+  /**
+   * Sorts provider list by specified rate type
+   * @param {Array} providers - List of providers to sort
+   * @param {string} currency - Currency code to use for rate comparison
+   * @param {string} buyOrSell - Rate type for sorting (buy/sell)
+   */
   sortByRate(providers, currency, buyOrSell) {
     providers.sort((providerA, providerB) => {
       let rateA, rateB;
@@ -105,18 +132,34 @@ export class FilterHandler {
     });
   }
 
+  /**
+   * Gets buy rate for provider and currency
+   * @param {Object} provider - Provider object
+   * @param {string} currency - Currency code
+   * @returns {number} Buy rate or 0 if not available
+   */
   getBuyRate(provider, currency) {
     const currencyCode = new CurrencyCode(currency);
     const rate = provider.getRate(currencyCode);
     return rate ? rate.getBuyRate() : 0;
   }
 
+  /**
+   * Gets sell rate for provider and currency
+   * @param {Object} provider - Provider object
+   * @param {string} currency - Currency code
+   * @returns {number} Sell rate or 0 if not available
+   */
   getSellRate(provider, currency) {
     const currencyCode = new CurrencyCode(currency);
     const rate = provider.getRate(currencyCode);
     return rate ? rate.getSellRate() : 0;
   }
 
+  /**
+   * Updates UI with filtered provider list
+   * @param {Array} providers - List of providers to display
+   */
   updateDisplay(providers) {
     this.providerDisplay.clearProviders();
 
@@ -143,6 +186,10 @@ export class FilterHandler {
     }
   }
 
+  /**
+   * Updates UI with filtered provider list
+   * @param {Array} providers - List of providers to display
+   */
   reset() {
     this.filterState.setCurrency("All currencies");
     this.filterState.setSearchedProviderName("");

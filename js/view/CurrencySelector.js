@@ -1,7 +1,16 @@
 import { CurrencyCode } from "../model/CurrencyCode.js";
 
+/**
+ * Handles currency selection UI with dropdown filtering
+ */
 export class CurrencySelector {
   static ALL_OPTION = "All currencies";
+
+  /**
+   * @param {HTMLElement} inputElement - The input field for search/filter
+   * @param {HTMLElement} dropdownElement - The dropdown container
+   * @param {Function} onSelectCallback - Called when selection changes
+   */
 
   constructor(inputElement, dropdownElement, onSelectCallback) {
     this.inputElement = inputElement;
@@ -20,6 +29,7 @@ export class CurrencySelector {
         : null;
   }
 
+  /** Sets up all DOM event listeners */
   setupEventListeners() {
     let initialSelection = null;
 
@@ -47,6 +57,7 @@ export class CurrencySelector {
     );
   }
 
+  /** Filters dropdown based on input text */
   handleInput() {
     const userInput = this.inputElement.value.toUpperCase().trim();
 
@@ -56,6 +67,7 @@ export class CurrencySelector {
     this.populateDropdown(filteredCodes);
   }
 
+  /** Populates dropdown with currency options */
   populateDropdown(codes) {
     this.dropdownElement.innerHTML = "";
     codes.forEach((code) => {
@@ -66,6 +78,7 @@ export class CurrencySelector {
     this.dropdownElement.classList.add("show");
   }
 
+  /** Handles currency selection */
   handleSelection(event) {
     if (event.button === 2) return;
 
@@ -91,6 +104,7 @@ export class CurrencySelector {
     this.hideDropdown();
   }
 
+  /** Closes dropdown when clicking outside */
   handleClickOutside(event) {
     if (
       !this.inputElement.contains(event.target) &&

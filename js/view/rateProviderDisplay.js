@@ -1,8 +1,19 @@
+/**
+ * Displays rate provider information in the UI
+ */
 export class RateProviderDisplay {
+  /**
+   * @param {string} containerId - ID of container element
+   */
   constructor(containerId) {
     this.container = document.getElementById(containerId);
   }
 
+  /**
+   * Creates table header row with appropriate columns
+   * @param {boolean} isCNB - Whether provider is Czech National Bank
+   * @returns {HTMLElement} Table header element
+   */
   createTableHeaders(isCNB) {
     const headers = isCNB
       ? ["Currency", "Middle Rate"]
@@ -18,6 +29,12 @@ export class RateProviderDisplay {
     return thead;
   }
 
+  /**
+   * Creates table row for a currency rate
+   * @param {Object} rate - Rate object with currency data
+   * @param {boolean} isCNB - Whether provider is Czech National Bank
+   * @returns {HTMLElement} Table row element
+   */
   createTableRow(rate, isCNB) {
     const row = document.createElement("tr");
 
@@ -41,6 +58,11 @@ export class RateProviderDisplay {
     return row;
   }
 
+  /**
+   * Creates section with provider header information
+   * @param {Object} provider - Provider object with details
+   * @returns {HTMLElement} Provider section element
+   */
   createProviderSection(provider) {
     const section = document.createElement("div");
     section.className = "provider-section";
@@ -57,6 +79,12 @@ export class RateProviderDisplay {
     return section;
   }
 
+  /**
+   * Creates table with rates for a provider
+   * @param {Object} provider - Provider with rate data
+   * @param {boolean} isCNB - Whether provider is Czech National Bank
+   * @returns {HTMLElement} Rates table element
+   */
   createTable(provider, isCNB) {
     const table = document.createElement("table");
     table.appendChild(this.createTableHeaders(isCNB));
@@ -70,6 +98,10 @@ export class RateProviderDisplay {
     return table;
   }
 
+  /**
+   * Renders provider data in container
+   * @param {Object} provider - Provider to display
+   */
   displayProvider(provider) {
     if (!this.container) {
       console.error("Container not found");
@@ -83,6 +115,9 @@ export class RateProviderDisplay {
     this.container.appendChild(providerSection);
   }
 
+  /**
+   * Clears all provider content from container
+   */
   clearProviders() {
     if (this.container) {
       this.container.innerHTML = "";
