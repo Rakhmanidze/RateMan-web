@@ -80,8 +80,11 @@ export class RateProviderDisplay {
     const phoneNumber = provider.getPhoneNumber();
     const phoneNumberPart = phoneNumber ? ` - ${phoneNumber}` : "";
 
+    const rawDate = provider.getRatesDate();
+    const displayDate = rawDate.split(" ")[0];
+
     const header = document.createElement("h2");
-    header.textContent = `${provider.getName()} - ${provider.getRatesDate()}${phoneNumberPart}`;
+    header.textContent = `${provider.getName()} - ${displayDate}${phoneNumberPart}`;
 
     section.appendChild(header);
     return section;
