@@ -7,7 +7,6 @@ export class CurrencyCode {
    * @type {Set<string>}
    */
   static VALID_CODES = new Set([
-    // Major currencies
     "USD",
     "EUR",
     "GBP",
@@ -28,8 +27,6 @@ export class CurrencyCode {
     "MXN",
     "SAR",
     "AED",
-
-    // European currencies
     "CZK",
     "DKK",
     "NOK",
@@ -44,9 +41,6 @@ export class CurrencyCode {
     "MDL",
     "UAH",
     "ISK",
-    "LTL",
-    "LVL",
-    "EEK",
     "MKD",
     "BYN",
     "AZN",
@@ -57,8 +51,6 @@ export class CurrencyCode {
     "TMT",
     "UZS",
     "KGS",
-
-    // Asian currencies
     "THB",
     "MYR",
     "IDR",
@@ -77,8 +69,6 @@ export class CurrencyCode {
     "KPW",
     "MOP",
     "TWD",
-
-    // Middle Eastern currencies
     "ILS",
     "JOD",
     "LBP",
@@ -90,8 +80,6 @@ export class CurrencyCode {
     "IQD",
     "YER",
     "SYP",
-
-    // African currencies
     "EGP",
     "MAD",
     "TND",
@@ -113,7 +101,6 @@ export class CurrencyCode {
     "MUR",
     "SCR",
     "MGA",
-    "MWK",
     "ZMW",
     "AOA",
     "CDF",
@@ -128,9 +115,6 @@ export class CurrencyCode {
     "SOS",
     "SSP",
     "STN",
-    "ZWL",
-
-    // Latin American currencies
     "ARS",
     "CLP",
     "COP",
@@ -140,7 +124,6 @@ export class CurrencyCode {
     "BOB",
     "VES",
     "CRC",
-    "PAB",
     "HNL",
     "NIO",
     "DOP",
@@ -152,7 +135,6 @@ export class CurrencyCode {
     "BZD",
     "HTG",
     "CUP",
-    "CUC",
     "XCD",
     "ANG",
     "AWG",
@@ -162,10 +144,6 @@ export class CurrencyCode {
     "FKP",
     "GIP",
     "SHP",
-    "IMP",
-    "JEP",
-    "GGP",
-
     "XDR",
     "BAM",
   ]);
