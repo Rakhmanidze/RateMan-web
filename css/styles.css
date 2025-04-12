@@ -277,24 +277,24 @@ footer a:hover {
   }
 }
 
-@media (max-width: 530px) {
+@media (max-width: 560px) {
   .search-and-filter input {
     width: 200px;
-    height: 34px;
+    height: 30px;
     padding: 6px 10px;
-    font-size: 0.875rem;
+    font-size: 0.86rem;
   }
   .best-rate-select {
     width: 140px;
     height: 30px;
     padding: 6px 10px;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
   }
   .provider-select {
     width: 140px;
     height: 30px;
     padding: 6px 10px;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
   }
   .currency-combobox {
     width: 110px;
@@ -302,9 +302,39 @@ footer a:hover {
   .currency-combobox input {
     height: 30px;
     padding: 6px 10px;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
   }
 }
+
+@media (max-width: 505px) {
+  .search-and-filter input {
+    width: 200px;
+    height: 34px;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+  .best-rate-select {
+    width: 120px;
+    height: 30px;
+    padding: 6px 10px;
+    font-size: 0.6rem;
+  }
+  .provider-select {
+    width: 120px;
+    height: 30px;
+    padding: 6px 10px;
+    font-size: 0.6rem;
+  }
+  .currency-combobox {
+    width: 90px;
+  }
+  .currency-combobox input {
+    height: 30px;
+    padding: 6px 10px;
+    font-size: 0.6rem;
+  }
+}
+
 @media (max-width: 480px) {
   body {
     font-size: 0.75rem;
@@ -321,6 +351,42 @@ footer a:hover {
   }
 }
 
+@media (max-width: 450px) {
+  .search-and-filter input {
+    width: 200px;
+    height: 28px;
+    padding: 2px 6px;
+    font-size: 0.85rem;
+  }
+  .best-rate-select {
+    width: 80px;
+    height: 28px;
+    padding: 2px 6px;
+    font-size: 0.5rem;
+  }
+  .provider-select {
+    width: 100px;
+    height: 28px;
+    padding: 2px 6px;
+    font-size: 0.5rem;
+  }
+  .currency-combobox {
+    width: 70px;
+  }
+
+  .currency-combobox div {
+    font-size: 0.5rem;
+  }
+  .currency-combobox input {
+    height: 28px;
+    padding: 2px 6px;
+    font-size: 0.5rem;
+  }
+  .controls-label {
+    font-size: 0.75rem;
+  }
+}
+
 @media (max-width: 370px) {
   .header-container {
     font-size: 0.75rem;
@@ -331,6 +397,46 @@ footer a:hover {
 }
 
 @media (max-width: 360px) {
+  .header-container {
+    font-size: 0.7rem;
+  }
+  #logo-link {
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 350px) {
+  .sorting-container {
+    flex-wrap: wrap;
+  }
+  .controls-label {
+    flex: 0 0 100%;
+    font-size: 0.7rem;
+  }
+  .provider-select {
+    width: 90px;
+    height: 26px;
+    padding: 2px 4px;
+    font-size: 0.5rem;
+  }
+  .currency-combobox {
+    width: 65px;
+  }
+  .currency-combobox input {
+    height: 26px;
+    padding: 2px 4px;
+    font-size: 0.5rem;
+  }
+  .currency-options div {
+    font-size: 0.5rem;
+    padding: 4px 4px;
+  }
+  .best-rate-select {
+    width: 75px;
+    height: 26px;
+    padding: 2px 4px;
+    font-size: 0.5rem;
+  }
   .header-container {
     font-size: 0.7rem;
   }
