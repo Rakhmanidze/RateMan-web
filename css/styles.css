@@ -308,29 +308,20 @@ footer a:hover {
 
 @media (max-width: 505px) {
   .search-and-filter input {
-    width: 200px;
-    height: 34px;
-    padding: 6px 10px;
     font-size: 0.85rem;
   }
   .best-rate-select {
     width: 120px;
-    height: 30px;
-    padding: 6px 10px;
     font-size: 0.6rem;
   }
   .provider-select {
     width: 120px;
-    height: 30px;
-    padding: 6px 10px;
     font-size: 0.6rem;
   }
   .currency-combobox {
     width: 90px;
   }
   .currency-combobox input {
-    height: 30px;
-    padding: 6px 10px;
     font-size: 0.6rem;
   }
 }
@@ -353,10 +344,8 @@ footer a:hover {
 
 @media (max-width: 450px) {
   .search-and-filter input {
-    width: 200px;
     height: 28px;
     padding: 2px 6px;
-    font-size: 0.85rem;
   }
   .best-rate-select {
     width: 80px;
@@ -374,8 +363,8 @@ footer a:hover {
     width: 70px;
   }
 
-  .currency-combobox div {
-    font-size: 0.5rem;
+  .currency-options div {
+    font-size: 0.6rem;
   }
   .currency-combobox input {
     height: 28px;
@@ -396,19 +385,7 @@ footer a:hover {
   }
 }
 
-@media (max-width: 360px) {
-  .header-container {
-    font-size: 0.7rem;
-  }
-  #logo-link {
-    max-width: 120px;
-  }
-}
-
 @media (max-width: 350px) {
-  .sorting-container {
-    flex-wrap: wrap;
-  }
   .controls-label {
     flex: 0 0 100%;
     font-size: 0.7rem;
@@ -417,7 +394,6 @@ footer a:hover {
     width: 90px;
     height: 26px;
     padding: 2px 4px;
-    font-size: 0.5rem;
   }
   .currency-combobox {
     width: 65px;
@@ -425,7 +401,6 @@ footer a:hover {
   .currency-combobox input {
     height: 26px;
     padding: 2px 4px;
-    font-size: 0.5rem;
   }
   .currency-options div {
     font-size: 0.5rem;
@@ -435,7 +410,6 @@ footer a:hover {
     width: 75px;
     height: 26px;
     padding: 2px 4px;
-    font-size: 0.5rem;
   }
   .header-container {
     font-size: 0.7rem;
