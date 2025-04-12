@@ -912,9 +912,7 @@ class RateProviderDisplay {
     const phoneNumber = provider.getPhoneNumber();
     const phoneNumberPart = phoneNumber ? ` - ${phoneNumber}` : "";
     const header = document.createElement("h2");
-    header.textContent = `${provider.getName()} - ${provider
-      .getBaseCurrency()
-      .getCode()} - ${provider.getRatesDate()}${phoneNumberPart}`;
+    header.textContent = `${provider.getName()} - ${provider.getRatesDate()}${phoneNumberPart}`;
     section.appendChild(header);
     return section;
   }
@@ -1108,7 +1106,7 @@ const currencyCodes = [
   "BAM",
 ];
 
-// Display flags in #flag-preview
+// flagUtils.js
 function displayCurrencyFlags() {
   const flagPreview = document.getElementById("flag-preview");
   if (!flagPreview) return;
@@ -1117,14 +1115,13 @@ function displayCurrencyFlags() {
     const img = document.createElement("img");
     img.src = `./sources/currencyImg/${code}.svg`;
     img.alt = `${code} flag`;
-    img.title = code; // Hover to see code
+    img.title = code;
     img.onerror = () => {
-      img.style.display = "none"; // Hide if file missing
+      img.style.display = "none";
       console.warn(`Flag not found: ${code}.svg`);
     };
     flagPreview.appendChild(img);
   });
 }
 
-// Main initialization
 displayCurrencyFlags();
