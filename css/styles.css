@@ -321,7 +321,7 @@ footer a:hover {
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 370px) {
   .header-container {
     flex-direction: column;
     align-items: flex-start;
