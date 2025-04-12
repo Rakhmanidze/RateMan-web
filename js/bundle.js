@@ -168,24 +168,8 @@ class CurrencyCode {
     "IMP",
     "JEP",
     "GGP",
-    "BEF",
-    "FIM",
-    "FRF",
-    "IEP",
-    "ITL",
-    "LUF",
     "XDR",
-    "DEM",
-    "NLG",
-    "PTE",
-    "ATS",
-    "GRD",
-    "SKK",
-    "ESP",
     "BAM",
-    "CYP",
-    "MTL",
-    "SIT",
   ]);
 
   constructor(code) {
@@ -521,7 +505,8 @@ function processProviderData(data) {
   try {
     if (
       data.banka === "Turecká centrální banka" ||
-      data.banka === "Poštovní spořitelna"
+      data.banka === "Poštovní spořitelna" ||
+      data.banka === "Prepocet EURa"
     ) {
       return null;
     }
