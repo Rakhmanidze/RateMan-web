@@ -377,7 +377,7 @@ footer a:hover {
 }
 
 @media (max-width: 370px) {
-  .header-container {
+  .header-container h2 {
     font-size: 0.75rem;
   }
   #logo-link {
@@ -386,6 +386,9 @@ footer a:hover {
 }
 
 @media (max-width: 350px) {
+  .header-container h2 {
+    font-size: 0.65rem;
+  }
   .controls-label {
     flex: 0 0 100%;
     font-size: 0.7rem;
@@ -411,7 +414,7 @@ footer a:hover {
     height: 26px;
     padding: 2px 4px;
   }
-  .header-container {
+  .header-container h2 {
     font-size: 0.7rem;
   }
   #logo-link {
