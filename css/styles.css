@@ -200,6 +200,21 @@ h2 {
   transform: translateY(-2px);
 }
 
+.provider-section td .flag-container {
+  display: inline-block;
+  width: 24px;
+  height: 20px;
+  margin-right: 5px;
+  vertical-align: middle;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.provider-section td {
+  padding: 8px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -339,6 +354,16 @@ footer a:hover {
   #logo-link {
     margin: 10px 0;
     max-width: 150px;
+  }
+
+  .provider-section td .flag-container {
+    width: 16px;
+    height: 13px;
+    margin-right: 3px;
+  }
+
+  .provider-section td {
+    padding: 4px;
   }
 }
 

@@ -1,3 +1,5 @@
+import { getFlagPath } from "../utils/flagUtils.js";
+
 /**
  * Displays rate provider information in the UI
  */
@@ -39,7 +41,15 @@ export class RateProviderDisplay {
     const row = document.createElement("tr");
 
     const currencyCell = document.createElement("td");
-    currencyCell.textContent = rate.getForeignCurrency().getCode();
+    const currencyCode = rate.getForeignCurrency().getCode();
+
+    const flagContainer = document.createElement("div");
+    flagContainer.className = "flag-container";
+    flagContainer.style.backgroundImage = `url(${getFlagPath(currencyCode)})`;
+    flagContainer.setAttribute("aria-label", `${currencyCode} flag`);
+
+    currencyCell.appendChild(flagContainer);
+    currencyCell.appendChild(document.createTextNode(currencyCode));
     row.appendChild(currencyCell);
 
     if (isCNB) {

@@ -157,7 +157,6 @@ class CurrencyCode {
     "BMD",
     "FKP",
     "GIP",
-    "SHP",
     "XDR",
     "BAM",
   ]);
@@ -848,6 +847,15 @@ class LogoHandler {
   }
 }
 
+/**
+ * Returns the path to the flag image for a given currency code.
+ * @param {string} currencyCode - The currency code (e.g., "EUR").
+ * @returns {string} The path to the flag image.
+ */
+export function getFlagPath(currencyCode) {
+  return `sources/currencyImg/${currencyCode.toUpperCase()}.svg`;
+}
+
 // RateProviderDisplay.js
 class RateProviderDisplay {
   constructor(containerId) {
@@ -872,8 +880,17 @@ class RateProviderDisplay {
   createTableRow(rate, isCNB) {
     const row = document.createElement("tr");
     const currencyCell = document.createElement("td");
-    currencyCell.textContent = rate.getForeignCurrency().getCode();
+    const currencyCode = rate.getForeignCurrency().getCode();
+
+    const flagContainer = document.createElement("div");
+    flagContainer.className = "flag-container";
+    flagContainer.style.backgroundImage = `url(${getFlagPath(currencyCode)})`;
+    flagContainer.setAttribute("aria-label", `${currencyCode} flag`);
+
+    currencyCell.appendChild(flagContainer);
+    currencyCell.appendChild(document.createTextNode(currencyCode));
     row.appendChild(currencyCell);
+
     if (isCNB) {
       const middleRateCell = document.createElement("td");
       middleRateCell.textContent = rate.getBuyRate().toFixed(4);
@@ -949,3 +966,165 @@ fetchAndProcessAllProviderRates()
   .catch((error) => {
     console.error("Error in main process:", error);
   });
+
+// addded
+const currencyCodes = [
+  "USD",
+  "EUR",
+  "GBP",
+  "JPY",
+  "AUD",
+  "CAD",
+  "CHF",
+  "CNY",
+  "INR",
+  "NZD",
+  "SGD",
+  "HKD",
+  "KRW",
+  "TRY",
+  "RUB",
+  "BRL",
+  "ZAR",
+  "MXN",
+  "SAR",
+  "AED",
+  "CZK",
+  "DKK",
+  "NOK",
+  "SEK",
+  "PLN",
+  "HUF",
+  "RON",
+  "BGN",
+  "HRK",
+  "RSD",
+  "ALL",
+  "MDL",
+  "UAH",
+  "ISK",
+  "MKD",
+  "BYN",
+  "AZN",
+  "AMD",
+  "GEL",
+  "KZT",
+  "TJS",
+  "TMT",
+  "UZS",
+  "KGS",
+  "THB",
+  "MYR",
+  "IDR",
+  "PHP",
+  "PKR",
+  "BDT",
+  "LKR",
+  "MMK",
+  "KHR",
+  "LAK",
+  "MNT",
+  "NPR",
+  "BTN",
+  "AFN",
+  "VND",
+  "KPW",
+  "MOP",
+  "TWD",
+  "ILS",
+  "JOD",
+  "LBP",
+  "KWD",
+  "BHD",
+  "OMR",
+  "QAR",
+  "IRR",
+  "IQD",
+  "YER",
+  "SYP",
+  "EGP",
+  "MAD",
+  "TND",
+  "DZD",
+  "LYD",
+  "SDG",
+  "ETB",
+  "KES",
+  "UGX",
+  "TZS",
+  "NGN",
+  "GHS",
+  "XOF",
+  "XAF",
+  "BWP",
+  "NAD",
+  "SZL",
+  "LSL",
+  "MUR",
+  "SCR",
+  "MGA",
+  "ZMW",
+  "AOA",
+  "CDF",
+  "DJF",
+  "ERN",
+  "GMD",
+  "GNF",
+  "LRD",
+  "MZN",
+  "RWF",
+  "SLL",
+  "SOS",
+  "SSP",
+  "STN",
+  "ARS",
+  "CLP",
+  "COP",
+  "PEN",
+  "UYU",
+  "PYG",
+  "BOB",
+  "VES",
+  "CRC",
+  "HNL",
+  "NIO",
+  "DOP",
+  "JMD",
+  "TTD",
+  "BBD",
+  "GYD",
+  "SRD",
+  "BZD",
+  "HTG",
+  "CUP",
+  "XCD",
+  "ANG",
+  "AWG",
+  "KYD",
+  "BSD",
+  "BMD",
+  "FKP",
+  "GIP",
+  "BAM",
+];
+
+// Display flags in #flag-preview
+function displayCurrencyFlags() {
+  const flagPreview = document.getElementById("flag-preview");
+  if (!flagPreview) return;
+
+  currencyCodes.forEach((code) => {
+    const img = document.createElement("img");
+    img.src = `./sources/currencyImg/${code}.svg`;
+    img.alt = `${code} flag`;
+    img.title = code; // Hover to see code
+    img.onerror = () => {
+      img.style.display = "none"; // Hide if file missing
+      console.warn(`Flag not found: ${code}.svg`);
+    };
+    flagPreview.appendChild(img);
+  });
+}
+
+// Main initialization
+displayCurrencyFlags();

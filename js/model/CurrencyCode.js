@@ -143,7 +143,6 @@ export class CurrencyCode {
     "BMD",
     "FKP",
     "GIP",
-    "SHP",
     "XDR",
     "BAM",
   ]);
