@@ -390,6 +390,8 @@ const phoneNumberData = [
   { name: "Max banka", phoneNumber: "+420 233 233 233" },
   { name: "Česká spořitelna", phoneNumber: "+420 277 207 207" },
   { name: "Trinity Bank", phoneNumber: "+420 800 678 678" },
+  { name: "Citfin", phoneNumber: "+420  800 311 010" },
+  { name: "Exchange VIP", phoneNumber: "+420  800 225 599" },
 ];
 
 // RateProviderService.js
