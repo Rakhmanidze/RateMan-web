@@ -75,4 +75,12 @@ export const phoneNumberData = [
     name: "Trinity Bank",
     phoneNumber: "+420 800 678 678",
   },
+  {
+    name: "Citfin",
+    phoneNumber: "+420  800 311 010",
+  },
+  {
+    name: "Exchange VIP",
+    phoneNumber: "+420  800 225 599",
+  },
 ];

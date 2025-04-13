@@ -147,7 +147,8 @@ function processProviderData(data) {
     if (
       data.banka === "Turecká centrální banka" ||
       data.banka === "Poštovní spořitelna" ||
-      data.banka === "Prepocet EURa"
+      data.banka === "Prepocet EURa" ||
+      data.banka === "Exchange"
     ) {
       return null;
     }
