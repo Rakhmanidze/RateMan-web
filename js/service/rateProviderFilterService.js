@@ -1,7 +1,11 @@
 import { RateProvider } from "../model/RateProvider.js";
 import { PROVIDER_TYPE, FILTER_PROVIDER_TYPE } from "../model/constants.js";
+import { SORT_OPTIONS } from "../model/constants.js";
+import { CurrencyCode } from "../model/CurrencyCode.js";
 
-/** Filters rate providers by type, search term, and currency */
+/**
+ * Service for filtering and sorting rate providers
+ */
 export class RateProviderFilterService {
   constructor() {
     this.originalProviders = [];
@@ -12,14 +16,20 @@ export class RateProviderFilterService {
   }
 
   /**
-   * Filters providers based on criteria
-   * @param {Object} filters
-   * @param {string} filters.providerType
-   * @param {string} filters.searchTerm
-   * @param {string} filters.currency
-   * @returns {RateProvider[]}
+   * Filters and sorts providers based on multiple criteria
+   * @param {Object} filters - Filtering and sorting parameters
+   * @param {string} [filters.providerType="all"] - Type of providers to include
+   * @param {string} [filters.searchTerm=""] - Search string to filter provider names
+   * @param {string} [filters.currency=""] - Currency code to filter by
+   * @param {string} [filters.sortType=""] - Sorting option (best-buy-rate/best-sell-rate)
+   * @returns {RateProvider[]} Filtered and sorted array of providers
    */
-  filterProviders({ providerType = "all", searchTerm = "", currency = "" }) {
+  filterProviders({
+    providerType = "all",
+    searchTerm = "",
+    currency = "",
+    sortType = "",
+  }) {
     try {
       if (!this.originalProviders?.length) {
         return [];
@@ -66,10 +76,68 @@ export class RateProviderFilterService {
           .filter((provider) => provider !== null);
       }
 
+      if (
+        sortType !== SORT_OPTIONS.NO_SORT &&
+        currency &&
+        filteredProviders &&
+        filteredProviders.length >= 2
+      ) {
+        this.sortByRate(
+          filteredProviders,
+          currency,
+          sortType === SORT_OPTIONS.BEST_BUY ? "buy" : "sell"
+        );
+      }
+
       return filteredProviders;
     } catch (error) {
       console.error("Error in filterProviders:", error);
       return [];
     }
+  }
+
+  /**
+   * Sorts provider list by specified rate type
+   * @param {Array} providers - List of providers to sort
+   * @param {string} currency - Currency code to use for rate comparison
+   * @param {string} buyOrSell - Rate type for sorting (buy/sell)
+   */
+  sortByRate(providers, currency, buyOrSell) {
+    providers.sort((providerA, providerB) => {
+      let rateA, rateB;
+      if (buyOrSell === "buy") {
+        rateA = this.getBuyRate(providerA, currency);
+        rateB = this.getBuyRate(providerB, currency);
+        return rateA - rateB;
+      } else {
+        rateA = this.getSellRate(providerA, currency);
+        rateB = this.getSellRate(providerB, currency);
+        return rateB - rateA;
+      }
+    });
+  }
+
+  /**
+   * Gets buy rate for provider and currency
+   * @param {Object} provider - Provider object
+   * @param {string} currency - Currency code
+   * @returns {number} Buy rate or 0 if not available
+   */
+  getBuyRate(provider, currency) {
+    const currencyCode = new CurrencyCode(currency);
+    const rate = provider.getRate(currencyCode);
+    return rate ? rate.getBuyRate() : 0;
+  }
+
+  /**
+   * Gets sell rate for provider and currency
+   * @param {Object} provider - Provider object
+   * @param {string} currency - Currency code
+   * @returns {number} Sell rate or 0 if not available
+   */
+  getSellRate(provider, currency) {
+    const currencyCode = new CurrencyCode(currency);
+    const rate = provider.getRate(currencyCode);
+    return rate ? rate.getSellRate() : 0;
   }
 }

@@ -240,7 +240,7 @@ class FilterState {
       searchProviderName: savedState.searchProviderName || "",
       currency: savedState.currency || "",
       providerType: savedState.providerType || "all",
-      sortBy: savedState.sortBy || "noRateSorting",
+      sortBy: savedState.sortBy || "noRate",
     };
   }
 
@@ -552,7 +552,12 @@ class RateProviderFilterService {
     this.originalProviders = providers;
   }
 
-  filterProviders({ providerType = "all", searchTerm = "", currency = "" }) {
+  filterProviders({
+    providerType = "all",
+    searchTerm = "",
+    currency = "",
+    sortType = "",
+  }) {
     try {
       if (!this.originalProviders?.length) {
         return [];
@@ -594,11 +599,52 @@ class RateProviderFilterService {
           })
           .filter((provider) => provider !== null);
       }
+
+      if (
+        sortType !== SORT_OPTIONS.NO_SORT &&
+        currency &&
+        filteredProviders &&
+        filteredProviders.length >= 2
+      ) {
+        this.sortByRate(
+          filteredProviders,
+          currency,
+          sortType === SORT_OPTIONS.BEST_BUY ? "buy" : "sell"
+        );
+      }
+
       return filteredProviders;
     } catch (error) {
       console.error("Error in filterProviders:", error);
       return [];
     }
+  }
+
+  sortByRate(providers, currency, buyOrSell) {
+    providers.sort((providerA, providerB) => {
+      let rateA, rateB;
+      if (buyOrSell === "buy") {
+        rateA = this.getBuyRate(providerA, currency);
+        rateB = this.getBuyRate(providerB, currency);
+        return rateA - rateB;
+      } else {
+        rateA = this.getSellRate(providerA, currency);
+        rateB = this.getSellRate(providerB, currency);
+        return rateB - rateA;
+      }
+    });
+  }
+
+  getBuyRate(provider, currency) {
+    const currencyCode = new CurrencyCode(currency);
+    const rate = provider.getRate(currencyCode);
+    return rate ? rate.getBuyRate() : 0;
+  }
+
+  getSellRate(provider, currency) {
+    const currencyCode = new CurrencyCode(currency);
+    const rate = provider.getRate(currencyCode);
+    return rate ? rate.getSellRate() : 0;
   }
 }
 
@@ -731,6 +777,8 @@ class FilterHandler {
     this.providerSearchInput.value = this.filterState.getSearchedProviderName();
     this.providerFilterDropdown.value = this.filterState.getProviderType();
     this.currencyInput.value = this.filterState.getCurrency() || "";
+    this.bestRateDropdown.value = this.filterState.getSortBy();
+
     this.applyAllFilters();
   }
 
@@ -744,7 +792,8 @@ class FilterHandler {
       this.applyAllFilters();
     });
     this.bestRateDropdown.addEventListener("change", (event) => {
-      this.sortByBestRate(event.target.value);
+      this.filterState.setSortBy(event.target.value);
+      this.applyAllFilters();
     });
   }
 
@@ -753,60 +802,11 @@ class FilterHandler {
       providerType: this.filterState.getProviderType(),
       searchTerm: this.filterState.getSearchedProviderName(),
       currency: this.filterState.getCurrency(),
+      sortType: this.filterState.getSortBy(),
     };
     const filteredProviders =
       this.providerFilterService.filterProviders(filters);
     this.updateDisplay(filteredProviders);
-  }
-
-  sortByBestRate(sortType) {
-    const currency = this.filterState.getCurrency();
-    if (!currency) {
-      return;
-    }
-    const filters = {
-      providerType: this.filterState.getProviderType(),
-      searchTerm: this.filterState.getSearchedProviderName(),
-      currency: currency,
-    };
-    let filteredProviders = this.providerFilterService.filterProviders(filters);
-    if (filteredProviders && filteredProviders.length >= 2) {
-      if (sortType === SORT_OPTIONS.BEST_BUY) {
-        this.sortByRate(filteredProviders, currency, "buy");
-      } else if (sortType === SORT_OPTIONS.BEST_SELL) {
-        this.sortByRate(filteredProviders, currency, "sell");
-      }
-      this.updateDisplay(filteredProviders);
-    } else {
-      this.updateDisplay(filteredProviders);
-    }
-  }
-
-  sortByRate(providers, currency, buyOrSell) {
-    providers.sort((providerA, providerB) => {
-      let rateA, rateB;
-      if (buyOrSell === "buy") {
-        rateA = this.getBuyRate(providerA, currency);
-        rateB = this.getBuyRate(providerB, currency);
-        return rateA - rateB;
-      } else {
-        rateA = this.getSellRate(providerA, currency);
-        rateB = this.getSellRate(providerB, currency);
-        return rateB - rateA;
-      }
-    });
-  }
-
-  getBuyRate(provider, currency) {
-    const currencyCode = new CurrencyCode(currency);
-    const rate = provider.getRate(currencyCode);
-    return rate ? rate.getBuyRate() : 0;
-  }
-
-  getSellRate(provider, currency) {
-    const currencyCode = new CurrencyCode(currency);
-    const rate = provider.getRate(currencyCode);
-    return rate ? rate.getSellRate() : 0;
   }
 
   updateDisplay(providers) {
