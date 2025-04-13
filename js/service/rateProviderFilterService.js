@@ -79,6 +79,7 @@ export class RateProviderFilterService {
       if (
         sortType !== SORT_OPTIONS.NO_SORT &&
         currency &&
+        currency !== "All currencies" &&
         filteredProviders &&
         filteredProviders.length >= 2
       ) {
