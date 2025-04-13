@@ -235,53 +235,63 @@ class CurrencyRate {
 // FilterState.js
 class FilterState {
   constructor() {
-    this.searchProviderName = localStorage.getItem("searchProviderName") || "";
-    this.currency = localStorage.getItem("currency") || "";
-    this.providerType = localStorage.getItem("providerType") || "all";
-    this.sortBy = localStorage.getItem("sortBy") || "noRateSorting";
+    const savedState = JSON.parse(localStorage.getItem("filterState")) || {};
+    this.state = {
+      searchProviderName: savedState.searchProviderName || "",
+      currency: savedState.currency || "",
+      providerType: savedState.providerType || "all",
+      sortBy: savedState.sortBy || "noRateSorting",
+    };
+  }
+
+  saveState() {
+    localStorage.setItem("filterState", JSON.stringify(this.state));
   }
 
   setSearchedProviderName(name) {
-    this.searchProviderName = name;
-    localStorage.setItem("searchProviderName", name);
+    this.state.searchProviderName = name;
+    this.saveState();
   }
 
   getSearchedProviderName() {
-    return this.searchProviderName;
+    return this.state.searchProviderName;
   }
 
   setCurrency(pair) {
-    this.currency = pair;
-    localStorage.setItem("currency", pair);
+    this.state.currency = pair;
+    this.saveState();
   }
 
   getCurrency() {
-    return this.currency;
+    return this.state.currency;
   }
 
   setProviderType(type) {
-    this.providerType = type;
-    localStorage.setItem("providerType", type);
+    this.state.providerType = type;
+    this.saveState();
   }
 
   getProviderType() {
-    return this.providerType;
+    return this.state.providerType;
   }
 
   setSortBy(sort) {
-    this.sortBy = sort;
-    localStorage.setItem("sortBy", sort);
+    this.state.sortBy = sort;
+    this.saveState();
   }
 
   getSortBy() {
-    return this.sortBy;
+    return this.state.sortBy;
   }
 
   clearAllFilters() {
-    this.setSearchedProviderName("");
-    this.setCurrency("");
-    this.setProviderType("all");
-    this.setSortBy("noRateSorting");
+    this.state = {
+      searchProviderName: "",
+      currency: "",
+      providerType: "all",
+      sortBy: "noRateSorting",
+    };
+    this.saveState();
   }
 }
 
