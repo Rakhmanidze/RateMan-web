@@ -287,9 +287,9 @@ class FilterState {
   clearAllFilters() {
     this.state = {
       searchProviderName: "",
-      currency: "",
+      currency: "All currencies",
       providerType: "all",
-      sortBy: "noRateSorting",
+      sortBy: SORT_OPTIONS.NO_SORT,
     };
     this.saveState();
   }
@@ -834,9 +834,7 @@ class FilterHandler {
   }
 
   reset() {
-    this.filterState.setCurrency("All currencies");
-    this.filterState.setSearchedProviderName("");
-    this.filterState.setProviderType("all");
+    this.filterState.clearAllFilters();
     this.providerSearchInput.value = "";
     this.providerFilterDropdown.value = FILTER_PROVIDER_TYPE.ALL;
     this.currencyInput.value = "";

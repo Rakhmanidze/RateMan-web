@@ -119,9 +119,7 @@ export class FilterHandler {
    * @param {Array} providers - List of providers to display
    */
   reset() {
-    this.filterState.setCurrency("All currencies");
-    this.filterState.setSearchedProviderName("");
-    this.filterState.setProviderType("all");
+    this.filterState.clearAllFilters();
     this.providerSearchInput.value = "";
     this.providerFilterDropdown.value = FILTER_PROVIDER_TYPE.ALL;
     this.currencyInput.value = "";

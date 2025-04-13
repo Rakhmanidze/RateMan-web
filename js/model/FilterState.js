@@ -1,3 +1,5 @@
+import { SORT_OPTIONS } from "../model/constants.js";
+
 /** Manages filter state with localStorage persistence using a single JSON object */
 export class FilterState {
   /**
@@ -96,9 +98,9 @@ export class FilterState {
   clearAllFilters() {
     this.state = {
       searchProviderName: "",
-      currency: "",
+      currency: "All currencies",
       providerType: "all",
-      sortBy: "noRateSorting",
+      sortBy: SORT_OPTIONS.NO_SORT,
     };
     this.saveState();
   }
