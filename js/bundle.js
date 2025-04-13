@@ -913,13 +913,13 @@ class RateProviderDisplay {
     const section = document.createElement("div");
     section.className = "provider-section";
     const phoneNumber = provider.getPhoneNumber();
-    const phoneNumberPart = phoneNumber ? ` - ${phoneNumber}` : "";
+    const phoneNumberPart = phoneNumber ? ` | ${phoneNumber}` : "";
 
     const rawDate = provider.getRatesDate();
     const displayDate = rawDate.split(" ")[0];
 
     const header = document.createElement("h2");
-    header.textContent = `${provider.getName()} - ${displayDate}${phoneNumberPart}`;
+    header.textContent = `${provider.getName()} | ${displayDate}${phoneNumberPart}`;
     section.appendChild(header);
     return section;
   }
