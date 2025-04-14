@@ -113,7 +113,7 @@ h2 {
 }
 
 .best-rate-select {
-  width: 139px;
+  width: 115px;
 }
 
 .best-rate-select.hidden {
@@ -301,7 +301,7 @@ footer a:hover {
     font-size: 0.86rem;
   }
   .best-rate-select {
-    width: 140px;
+    width: 94px;
     height: 30px;
     padding: 6px 10px;
     font-size: 0.75rem;
@@ -327,7 +327,7 @@ footer a:hover {
     font-size: 0.85rem;
   }
   .best-rate-select {
-    width: 120px;
+    width: 84px;
     font-size: 0.6rem;
   }
   .provider-select {
@@ -374,7 +374,7 @@ footer a:hover {
     padding: 2px 6px;
   }
   .best-rate-select {
-    width: 80px;
+    width: 69px;
     height: 28px;
     padding: 2px 6px;
     font-size: 0.5rem;
@@ -436,7 +436,7 @@ footer a:hover {
     padding: 4px 4px;
   }
   .best-rate-select {
-    width: 75px;
+    width: 65px;
     height: 26px;
     padding: 2px 4px;
   }
