@@ -173,10 +173,6 @@ export class CurrencyCode {
   }
 
   static create(currency) {
-    try {
-      return new CurrencyCode(currency);
-    } catch (error) {
-      return null;
-    }
+    return new CurrencyCode(currency);
   }
 }
