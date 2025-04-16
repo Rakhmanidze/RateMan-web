@@ -190,7 +190,6 @@ class CurrencyCode {
     try {
       return new CurrencyCode(currency);
     } catch (error) {
-      console.warn(`Skipping unsupported currency: ${currency}`);
       return null;
     }
   }
@@ -980,7 +979,6 @@ fetchAndProcessAllProviderRates()
   .catch((error) => {
     console.error("Error in main process:", error);
   });
-
 
 // flagUtils.js
 function displayCurrencyFlags() {

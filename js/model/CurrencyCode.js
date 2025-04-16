@@ -176,7 +176,6 @@ export class CurrencyCode {
     try {
       return new CurrencyCode(currency);
     } catch (error) {
-      console.warn(`Skipping unsupported currency: ${currency}`);
       return null;
     }
   }
