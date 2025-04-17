@@ -99,7 +99,6 @@ export class CurrencyCode {
     "MZN",
     "RWF",
     "SLL",
-    "STN",
     "ARS",
     "CLP",
     "COP",
