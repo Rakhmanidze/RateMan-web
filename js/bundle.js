@@ -1,4 +1,3 @@
-// constants.js
 const PROVIDER_TYPE = {
   BANK: "bank",
   EXCHANGE: "exchange",
@@ -18,7 +17,6 @@ const SORT_OPTIONS = {
   BEST_SELL: "best-sell-rate",
 };
 
-// CurrencyCode.js
 class CurrencyCode {
   static VALID_CODES = new Set([
     "USD",
@@ -91,7 +89,6 @@ class CurrencyCode {
   }
 }
 
-// CurrencyRate.js
 class CurrencyRate {
   constructor(foreignCurrency, buyRate, sellRate) {
     if (!(foreignCurrency instanceof CurrencyCode)) {
@@ -127,7 +124,6 @@ class CurrencyRate {
   }
 }
 
-// FilterState.js
 class FilterState {
   constructor() {
     const savedState = JSON.parse(localStorage.getItem("filterState")) || {};
@@ -190,7 +186,6 @@ class FilterState {
   }
 }
 
-// RateProvider.js
 const VALID_TYPES = Object.values(PROVIDER_TYPE);
 
 class RateProvider {
@@ -255,10 +250,8 @@ class RateProvider {
   }
 }
 
-// apiConfig.js
 const API_URL = "https://data.kurzy.cz/json/meny/b[-1].json";
 
-// bankNames.js
 const bankNames = [
   "Komerční banka",
   "Česká národní banka",
@@ -275,7 +268,6 @@ const bankNames = [
   "Česká spořitelna",
 ];
 
-// phoneNumberData.js
 const phoneNumberData = [
   { name: "AKCENTA CZ", phoneNumber: "+420 498 777 770" },
   { name: "Směnárna Nekázanka Exchange", phoneNumber: "+420 773 152 658" },
@@ -299,7 +291,6 @@ const phoneNumberData = [
   { name: "Exchange VIP", phoneNumber: "+420  800 225 599" },
 ];
 
-// RateProviderService.js
 async function fetchAllProviderRatesData() {
   if (!navigator.onLine) {
     console.log("No internet connection detected. Using cached data.");
@@ -437,7 +428,6 @@ async function fetchAndProcessAllProviderRates() {
   }
 }
 
-// RateProviderFilterService.js
 class RateProviderFilterService {
   constructor() {
     this.originalProviders = [];
@@ -544,7 +534,6 @@ class RateProviderFilterService {
   }
 }
 
-// CurrencySelector.js
 class CurrencySelector {
   static ALL_OPTION = "All currencies";
 
@@ -645,7 +634,6 @@ class CurrencySelector {
   }
 }
 
-// FilterHandler.js
 class FilterHandler {
   constructor(providerFilterService, providerDisplay, filterState) {
     this.providerSearchInput = document.getElementById("provider-search");
@@ -738,7 +726,6 @@ class FilterHandler {
   }
 }
 
-// LogoHandler.js
 class LogoHandler {
   constructor(filterHandler) {
     this.filterHandler = filterHandler;
@@ -754,16 +741,10 @@ class LogoHandler {
   }
 }
 
-/**
- * Returns the path to the flag image for a given currency code.
- * @param {string} currencyCode - The currency code (e.g., "EUR").
- * @returns {string} The path to the flag image.
- */
 export function getFlagPath(currencyCode) {
   return `sources/currencyImg/${currencyCode.toUpperCase()}.svg`;
 }
 
-// RateProviderDisplay.js
 class RateProviderDisplay {
   constructor(containerId) {
     this.container = document.getElementById(containerId);
@@ -857,7 +838,6 @@ class RateProviderDisplay {
   }
 }
 
-// script.js
 const providerDisplay = new RateProviderDisplay("provider-display");
 const providerFilterService = new RateProviderFilterService();
 const filterState = new FilterState();
@@ -876,7 +856,6 @@ fetchAndProcessAllProviderRates()
     console.error("Error in main process:", error);
   });
 
-// flagUtils.js
 function displayCurrencyFlags() {
   const flagPreview = document.getElementById("flag-preview");
   if (!flagPreview) return;
