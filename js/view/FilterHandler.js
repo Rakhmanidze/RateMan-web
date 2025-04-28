@@ -103,7 +103,10 @@ export class FilterHandler {
       this.bestRateDropdown.classList.add("hidden");
     }
 
-    if (!providers || providers.length === 0) {
+    if (!this.providerFilterService.originalProviders.length) {
+      this.noResultsMessage.textContent = "Loading";
+      this.providerDisplay.container.appendChild(this.noResultsMessage);
+    } else if (!providers || providers.length === 0) {
       this.noResultsMessage.textContent = "No results found";
       this.providerDisplay.container.appendChild(this.noResultsMessage);
     } else {

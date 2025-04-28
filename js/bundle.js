@@ -705,7 +705,10 @@ class FilterHandler {
     } else {
       this.bestRateDropdown.classList.add("hidden");
     }
-    if (!providers || providers.length === 0) {
+    if (!this.providerFilterService.originalProviders.length) {
+      this.noResultsMessage.textContent = "Loading";
+      this.providerDisplay.container.appendChild(this.noResultsMessage);
+    } else if (!providers || providers.length === 0) {
       this.noResultsMessage.textContent = "No results found";
       this.providerDisplay.container.appendChild(this.noResultsMessage);
     } else {
@@ -847,6 +850,7 @@ const filterHandler = new FilterHandler(
   filterState
 );
 new LogoHandler(filterHandler);
+
 fetchAndProcessAllProviderRates()
   .then((providers) => {
     providerFilterService.setProviders(providers);
