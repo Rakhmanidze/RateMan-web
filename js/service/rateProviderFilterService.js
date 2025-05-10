@@ -105,6 +105,13 @@ export class RateProviderFilterService {
    */
   sortByRate(providers, currency, buyOrSell) {
     providers.sort((providerA, providerB) => {
+      const isMiddleA = this.isMiddleRateProvider(providerA, currency);
+      const isMiddleB = this.isMiddleRateProvider(providerB, currency);
+
+      if (isMiddleA && !isMiddleB) return 1;
+      if (!isMiddleA && isMiddleB) return -1;
+      if (isMiddleA && isMiddleB) return 0;
+
       let rateA, rateB;
       if (buyOrSell === "buy") {
         rateA = this.getBuyRate(providerA, currency);
@@ -116,6 +123,29 @@ export class RateProviderFilterService {
         return rateA - rateB;
       }
     });
+  }
+
+  /**
+   * Checks if provider offers a middle rate (buy rate equals sell rate)
+   * @param {RateProvider} provider - Provider object
+   * @param {string} currency - Currency code
+   * @returns {boolean} True if buy and sell rates are equal and non-zero
+   */
+
+  isMiddleRateProvider(provider, currency) {
+    const currencyCode = new CurrencyCode(currency);
+    const rate = provider.getRate(currencyCode);
+    if (!rate) return false;
+
+    const buyRate = rate.getBuyRate();
+    const sellRate = rate.getSellRate();
+
+    return (
+      buyRate !== undefined &&
+      sellRate !== undefined &&
+      buyRate === sellRate &&
+      buyRate !== 0
+    );
   }
 
   /**

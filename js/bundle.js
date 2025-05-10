@@ -508,10 +508,19 @@ class RateProviderFilterService {
 
   sortByRate(providers, currency, buyOrSell) {
     providers.sort((providerA, providerB) => {
+      const isMiddleA = this.isMiddleRateProvider(providerA, currency);
+      const isMiddleB = this.isMiddleRateProvider(providerB, currency);
+
+      if (isMiddleA && !isMiddleB) return 1;
+      if (!isMiddleA && isMiddleB) return -1;
+      if (isMiddleA && isMiddleB) return 0;
+
       let rateA, rateB;
+
       if (buyOrSell === "buy") {
         rateA = this.getBuyRate(providerA, currency);
         rateB = this.getBuyRate(providerB, currency);
+
         return rateB - rateA;
       } else {
         rateA = this.getSellRate(providerA, currency);
@@ -519,6 +528,22 @@ class RateProviderFilterService {
         return rateA - rateB;
       }
     });
+  }
+
+  isMiddleRateProvider(provider, currency) {
+    const currencyCode = new CurrencyCode(currency);
+    const rate = provider.getRate(currencyCode);
+    if (!rate) return false;
+
+    const buyRate = rate.getBuyRate();
+    const sellRate = rate.getSellRate();
+
+    return (
+      buyRate !== undefined &&
+      sellRate !== undefined &&
+      buyRate === sellRate &&
+      buyRate !== 0
+    );
   }
 
   getBuyRate(provider, currency) {
