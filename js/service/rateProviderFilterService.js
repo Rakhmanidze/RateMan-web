@@ -109,11 +109,11 @@ export class RateProviderFilterService {
       if (buyOrSell === "buy") {
         rateA = this.getBuyRate(providerA, currency);
         rateB = this.getBuyRate(providerB, currency);
-        return rateA - rateB;
+        return rateB - rateA;
       } else {
         rateA = this.getSellRate(providerA, currency);
         rateB = this.getSellRate(providerB, currency);
-        return rateB - rateA;
+        return rateA - rateB;
       }
     });
   }
